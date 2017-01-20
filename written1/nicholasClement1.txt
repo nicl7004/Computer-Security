@@ -1,0 +1,20 @@
+1. {Stadium} Scenario
+
+Assets:
+- Infrastructure - We want the stadium to be in good shape for the players and fans
+- Players - If something happens to the players (outside of the game) we will loose revenue.
+- Fans - Without the fans we wouldn't have the need for a stadium.
+
+Threats:
+- Stadium Bombing - It is possible that an adversary wish to harm the fans and players of the stadium through use of explosives.
+- Crowd rushing the field - After a high-stakes game the crowd may rush the field and harm the players or each other in the process.
+- Graffiti and destruction of stadium property - It is possible that an adversary wish to leave a mark on the stadium through graffiti or other means.
+
+Countermeasures:
+- Increase the screening at the gate of the stadium - With increased screening will come inconvenience and the prices of hiring workers
+as well as purchasing the machines required to preform the screening.  With this comes more confidence that no malicious items can enter the
+stadium in the hands of an adversary.  This could provide a solution to threats 1 and 3.
+- Increase security near the end of the game - Spread several security personnel around the edge of the field near the end of the game to discourage
+rushing of the field.  This will again cost more money to employ the security personnel.
+- Increase security cameras - Install high res cameras around the stadium, will discourage adversaries from preforming destruction of property and other malicious acts.
+This will cost money for hardware, but might be less expensive than hiring more personnel.
