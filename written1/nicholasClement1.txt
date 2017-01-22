@@ -73,3 +73,31 @@ Countermeasures:
 composition of the sticker, and if it isn't yet scanned. This approach would be time consuming, employees would need to make sure that every item in the store has a sticker.
 - The self checkout should be robust - both physically large and strong it should be very difficult to break into a self checkout via force, especially in the midst of other shoppers.
 - The self checkout will be off the network - This will disallow adversaries to remotely access the self-checkout and tamper with the software controlling the system.
+
+4 {Bike to School Daily} Scenario
+
+Background:
+I bike to school daily.  I want to make sure that my bike remains safe, and in good condition.  In my three years at CU, I have yet to loose my bike.  CU is a large campus,
+and it is likely that there are several bike theifs in the thousands of people on campus daily.  I assume that my bike is in a public place, and that many people walk by it
+after I park in the morning daily.  I also assume that our adversary knows a good amount of information about bikes like tire size, quick releases, etc.
+
+Assets:
+- Front tire - Having a bike with disc breaks and 29 inch tires makes it appealable to many people.  My bike has a quick release on the front tire to allow for easy transportation
+on roof racks.
+- Frame - The most valuable part of the bike.  The frame is the hardest to replace on a bike and the most expensive part of the entire setup.
+- Lights - Boulder requires cyclists to have lights on the front and back of their bikes when riding past dusk.  Bike lights are vital when riding the less populated trails at night
+and a good bike light can be somewhat expensive.
+
+Threats:
+- Adversary is looking to steal an entire bike - Our adversary may be on the prowl to steal a new bike, in this cause my bike might appeal to them for a certain attribute like the larger wheels,
+or green frame.
+- Adversary is looking to steal a new front tire - Under the assumption our adversary knows what they are looking for, a 29 inch tire might meet their requirement.  Combined with the quick release
+my front tire is an easy target.
+- Adversary wants new bike lights - If our adversary notices a 50 dollar headlight unsecured to a bike, they might wish to have it for themself free of charge.
+
+Countermeasures:
+- Bike locks - The simplest way to prevent theft is with a bike lock.  Bike locks are relatively inexpensive, and range from rock solid U-locks to flimsy
+inexpensive cable locks.  Typically it is best to run the lock through the frame of the bike as a bare minimum.  For full protection the best practice is to include tires in
+the lock as well.  This will force the lock to be broken or cut before any part of the bike is stolen.
+- Quick release headlight/taillight - Bike lights are hard to secure.  One possible solution due to the small nature of these lights is to make them quickly attachable and removable.
+This allows the owner of the bike light to carry the light around on their person, ensuring no theft will occur.
