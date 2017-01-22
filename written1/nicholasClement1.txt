@@ -1,5 +1,10 @@
 1. {Stadium} Scenario
 
+Assumptions:
+I assume that the stadium will hold thousands of fans.  There are a finite number of entrances for the fans to use, and that there is a security budget
+for upgrades in protection.  I assume that the sport will have rowdy fans (at least occasionally). I assume that that any fan may be an adversary, I also assume
+that players are unlikely to be adversaries to the stadium.
+
 Assets:
 - Infrastructure - We want the stadium to be in good shape for the players and fans
 - Players - If something happens to the players (outside of the game) we will loose revenue.
@@ -18,3 +23,53 @@ stadium in the hands of an adversary.  This could provide a solution to threats 
 rushing of the field.  This will again cost more money to employ the security personnel.
 - Increase security cameras - Install high res cameras around the stadium, will discourage adversaries from preforming destruction of property and other malicious acts.
 This will cost money for hardware, but might be less expensive than hiring more personnel.
+
+2. {NSA} Scenario
+
+Assumptions:
+I assume that the new employee will have a large number of tools for surveillance at their disposal if hired. I assume that the employee is talented technically
+and good at communicating.  I assume the employee must have considerable resources at their disposal if in the position to work at the NSA.  I assume the employee has
+previous experience in how surveillance works, including some ways to circumvent it.
+
+Assets:
+- Records/Data - The primary goal of the NSA is to collect, process, and monitor data for the security of the citizens of America.  The NSA's greatest asset is data.
+- Data Gathering Ability -  The NSA has the ability to gain data on individuals and groups of people efficiently. These methods of acquisition power the NSA and their data collection.
+
+Threats:
+- The potential employee is an adversary - If the potential employee has a history with a certain individual, they may wish to use the data/data gathering abilities of the NSA in an
+effort to harm that individual.
+- The potential employee is working for an adversary - If the potential employee is hired by an adversary and given access to the data and data gathering capabilities of the NSA then
+the adversary will be able to maliciously use the NSA's data.
+- The potential employee is an intelligence expert - If the potential employee knows how to beat a background check and avoid surveillance it is hard for the agency to know the employees
+intentions after hire.
+
+Countermeasures:
+- Increase the length of the hiring process - If the hiring process is 6-12 months long it is hard for the potential employee to join out of reaction.  Meaning they wish to join to gain
+information relevant to that period of time, for instance the motives of a frustrated/jealous individual might change after 6-12 months.  This would make the process more demanding and less
+friendly to future employees.
+- Slowly increase the permissions of the new employee - Instead of giving new employees the key to all of the NSA, start them off with the ability to monitor smaller harmless data.  As time
+passes begin to increase their permissions.  This is inexpensive and would force the employee to be with the NSA for an extended period of time before reaching important data.
+
+3. {Checkout} Scenario
+
+Assumptions:
+I assume that the grocery store has hundreds of customers a day, and needs multiple checkout lanes to accommodate busy times.  I am also assuming that there are shoplifters present in the
+system, and that theft wants to be minimized. I assume that all customers using the self checkout are slightly knowledgeable about technology, things like knowing how to use touchscreens
+and scan food items.
+
+Assets:
+- Grocery for sale - The grocery store offers food and other amenities to customers for a price, without groceries the self-checkout will have no purpose.
+- Cash inside the self-checkout machines - Used to make change for customers who pay with cash, we want to make sure that this money cannot be stolen.
+- Employees - Employees work to stock the shelves of the store, prevent shop-lifting, and help customers who require assistance.
+
+Threats:
+- A potential customer might be an adversary wishing to steal groceries without making a scene running out.  In most self-checkout instances the shopper is responsible for making sure every
+item is scanned. If they wished to hide something in their coat or elsewhere, there is no cashier to notice the abnormality.
+- An adversary could want to break into the self checkout machine via force, and get the cash inside the machine.
+- A technical adversary might try to break into the self-checkout through the software or interface, and make it spit out all of the monetary contents within.
+
+Countermeasures:
+- There could be some sort of scanning system present in the self checkout - With a special material sticker on all grocery items in the store the self checkout will recognize the
+composition of the sticker, and if it isn't yet scanned. This approach would be time consuming, employees would need to make sure that every item in the store has a sticker.
+- The self checkout should be robust - both physically large and strong it should be very difficult to break into a self checkout via force, especially in the midst of other shoppers.
+- The self checkout will be off the network - This will disallow adversaries to remotely access the self-checkout and tamper with the software controlling the system.
