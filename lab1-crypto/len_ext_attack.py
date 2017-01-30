@@ -61,10 +61,7 @@ print h.hexdigest()
 print("\n\n")
 h = md5(state="3ecc68efa1871751ea9b0b1a5b25004d".decode("hex"), count=512)
 print(len(m))
-# pad = padding((len(m)*8))
-# print(padding(160))
-# print type(pad)
-# print(pad)
+
 newPad = padding(len(m)*8)
 
 generatePad = ''
@@ -87,10 +84,3 @@ print newMd5.hexdigest()
 h.update(x)
 print h.hexdigest()
 print("\n\n")
-
-#print(location)
-# #
-# parsedUrl = urlparse.urlparse(strurl)
-# conn = httplib.HTTPSConnection(parsedUrl.hostname)
-# conn.request("GET", parsedUrl.path + "?" + parsedUrl.query)
-# print conn.getresponse().read()

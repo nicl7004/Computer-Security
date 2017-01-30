@@ -1,4 +1,9 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
-print("I come in peace.")
+typ = "good"
+if typ == "good":
+    print("I come in peace")
+else:
+    print("Prepare to be destroyed")
+    pass
 blob = """
