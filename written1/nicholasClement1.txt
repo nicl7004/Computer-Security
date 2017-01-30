@@ -2,22 +2,21 @@
 
 Assumptions:
 I assume that the stadium will hold thousands of fans.  There are a finite number of entrances for the fans to use, and that there is a security budget
-for upgrades in protection.  I assume that the sport will have rowdy fans (at least occasionally). I assume that that any fan may be an adversary, I also assume
-that players are unlikely to be adversaries to the stadium.
+for upgrades in protection.  I assume that the sport will have rowdy fans (at least occasionally). I assume that that any fan may be an adversary, I also assume that players are unlikely to be adversaries to the stadium.
 
 Assets:
 - Infrastructure - We want the stadium to be in good shape for the players and fans
-- Players - If something happens to the players (outside of the game) we will loose revenue.
+- Players - If something happens to the players we will lose revenue.
 - Fans - Without the fans we wouldn't have the need for a stadium.
 
 Threats:
-- Stadium Bombing - It is possible that an adversary wish to harm the fans and players of the stadium through use of explosives.
+- Stadium Bombing - It is possible that an adversary wishes to harm the fans and players of the stadium through use of explosives.
 - Crowd rushing the field - After a high-stakes game the crowd may rush the field and harm the players or each other in the process.
-- Graffiti and destruction of stadium property - It is possible that an adversary wish to leave a mark on the stadium through graffiti or other means.
+- Graffiti and destruction of stadium property - It is possible that an adversary wishes to leave a mark on the stadium through graffiti or other means.
 
 Countermeasures:
 - Increase the screening at the gate of the stadium - With increased screening will come inconvenience and the prices of hiring workers
-as well as purchasing the machines required to preform the screening.  With this comes more confidence that no malicious items can enter the
+as well as purchasing the machines required to perform the screening.  With this comes more confidence that no malicious items can enter the
 stadium in the hands of an adversary.  This could provide a solution to threats 1 and 3.
 - Increase security near the end of the game - Spread several security personnel around the edge of the field near the end of the game to discourage
 rushing of the field.  This will again cost more money to employ the security personnel.
@@ -77,8 +76,8 @@ composition of the sticker, and if it isn't yet scanned. This approach would be 
 4 {Bike to School Daily} Scenario
 
 Background:
-I bike to school daily.  I want to make sure that my bike remains safe, and in good condition.  In my three years at CU, I have yet to loose my bike.  CU is a large campus,
-and it is likely that there are several bike theifs in the thousands of people on campus daily.  I assume that my bike is in a public place, and that many people walk by it
+I bike to school daily.  I want to make sure that my bike remains safe, and in good condition.  In my three years at CU, I have yet to lose my bike.  CU is a large campus,
+and it is likely that there are several bike thief’s in the thousands of people on campus daily.  I assume that my bike is in a public place, and that many people walk by it
 after I park in the morning daily.  I also assume that our adversary knows a good amount of information about bikes like tire size, quick releases, etc.
 
 Assets:
@@ -93,11 +92,12 @@ Threats:
 or green frame.
 - Adversary is looking to steal a new front tire - Under the assumption our adversary knows what they are looking for, a 29 inch tire might meet their requirement.  Combined with the quick release
 my front tire is an easy target.
-- Adversary wants new bike lights - If our adversary notices a 50 dollar headlight unsecured to a bike, they might wish to have it for themself free of charge.
+- Adversary wants new bike lights - If our adversary notices a 50 dollar headlight unsecured to a bike, they might wish to have it for themselves free of charge.
 
 Countermeasures:
 - Bike locks - The simplest way to prevent theft is with a bike lock.  Bike locks are relatively inexpensive, and range from rock solid U-locks to flimsy
-inexpensive cable locks.  Typically it is best to run the lock through the frame of the bike as a bare minimum.  For full protection the best practice is to include tires in
+inexpensive cable locks.  Typically, it is best to run the lock through the frame of the bike as a bare minimum.  For full protection the best practice is to include tires in
 the lock as well.  This will force the lock to be broken or cut before any part of the bike is stolen.
 - Quick release headlight/taillight - Bike lights are hard to secure.  One possible solution due to the small nature of these lights is to make them quickly attachable and removable.
 This allows the owner of the bike light to carry the light around on their person, ensuring no theft will occur.
+
