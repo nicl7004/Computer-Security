@@ -7,35 +7,48 @@ def findReps(cipher):
     while len(cipher)>0:
         for letter in range(len(cipher)):
             x+=1
-            occurances[cipher[0:letter]]+=1
+
+            occurances[cipher[0:letter+1]]+=1
             print("Iteration #", x)
         cipher = cipher[1:] #remove a letter from cipher
-    return (occurances.most_common(20))
+    mostCommon = occurances.most_common(300)
+    # mostCommon = (Counter(cipher)).most_common(1000)
+    # print(mostCommon)
+    nGrams = []
+    for each in mostCommon:
+        if len(each[0]) >=3:
+            nGrams.append(each)
+    # print(nGrams)
+    return (nGrams)
 
-def kasiskiExamination(ciphertext):
-    # Find out the sequences of 3 to 5 letters that occur multiple times
-    # in the ciphertext. repeatedSeqSpacings has a value like:
-    # {'EXG': [192], 'NAF': [339, 972, 633], ... }
-    repeatedSeqSpacings = findRepeatSequencesSpacings(ciphertext)
+def findLocations(cipher,chars):
+    locations= []
+    index = start = 0
+    while len(cipher)>0:
+        start = cipher.find(chars,start)
+        if start == -1:
+            return
+        locations.append(start)
+        start += len(chars)
+        # index += cipher.find(chars)
+        # locations.append(index)
+        # # print(cipher)
+        # # print(locations[-1])
+        # test = cipher #store cipher to see if it changes
+        # cipher = cipher[locations[-1]:] #update string to latest location of chars
+        # if test == cipher: #if cipher doesnt change then return
+        #     return locations
+    return(locations)
 
-    # See getMostCommonFactors() for a description of seqFactors.
-    seqFactors = {}
-    for seq in repeatedSeqSpacings:
-        seqFactors[seq] = []
-        for spacing in repeatedSeqSpacings[seq]:
-            seqFactors[seq].extend(getUsefulFactors(spacing))
-
-    # See getMostCommonFactors() for a description of factorsByCount.
-    factorsByCount = getMostCommonFactors(seqFactors)
-
-    # Now we extract the factor counts from factorsByCount and
-    # put them in allLikelyKeyLengths so that they are easier to
-    # use later.
-    allLikelyKeyLengths = []
-    for twoIntTuple in factorsByCount:
-        allLikelyKeyLengths.append(twoIntTuple[0])
-
-    return allLikelyKeyLengths
+def repLocations(cipher):
+    reps = findReps(cipher)
+    print(reps)
+    occuranceInfo= {}
+    for each in reps:
+        occuranceInfo[each[0]] = findLocations(cipher, each[0])
+    print (occuranceInfo)
+    return occuranceInfo
+# def spacing(cipher,repLocations):
 
 # def mostOccuring(d):
 #     '''A: make a list of the dict values and keys
@@ -71,6 +84,7 @@ JQBBXIJUWIYHHNISNSHVIFEOTUMEHGODSITUSXNUMDJBUWVXFQFIGLHVUVYTUHVDFSAWMFs
 OYYJVXFMOQPQJFSQYXHRKJGOYFSETHCEXXZPBUWWLVFTZLUKLFRNSDXKIWMTVEMJCFLWMF
 OCZEKIIJUBERJEPHVPLRXGCLNHHKPWHNUMDJBUEHSEFGYWIEJHWPPQMEUVYQLJKIOGPQHD"""
     text = "Hello"
-    print(findReps(texty))
+
+    repLocations(texty)
 if __name__ == '__main__':
     main()
