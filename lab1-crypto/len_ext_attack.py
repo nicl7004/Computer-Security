@@ -62,7 +62,7 @@ url = url.replace(token, newtoken)
 # print "\n New URL is:"
 # print newUrl
 
-temp = 'https://ecen5032.org/project1/api?token=d0c7a65c690cf624cdc94dc551cc1c5c&user=admin&command1=ListFiles&command2=NoOp'
+# temp = 'https://ecen5032.org/project1/api?token=d0c7a65c690cf624cdc94dc551cc1c5c&user=admin&command1=ListFiles&command2=NoOp'
 
 parsedUrl = urlparse.urlparse(newUrl)
 conn = httplib.HTTPSConnection(parsedUrl.hostname)
