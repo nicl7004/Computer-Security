@@ -22,14 +22,18 @@ def findReps(cipher):
     return (nGrams)
 
 def findLocations(cipher,chars):
-    locations= []
+    locations = []
     index = start = 0
     while len(cipher)>0:
         start = cipher.find(chars,start)
         if start == -1:
-            return
+            return locations
+
         locations.append(start)
+        # print(locations)
         start += len(chars)
+
+        # print(chars, start)
         # index += cipher.find(chars)
         # locations.append(index)
         # # print(cipher)
@@ -38,34 +42,19 @@ def findLocations(cipher,chars):
         # cipher = cipher[locations[-1]:] #update string to latest location of chars
         # if test == cipher: #if cipher doesnt change then return
         #     return locations
+    # print(locations)
     return(locations)
 
 def repLocations(cipher):
     reps = findReps(cipher)
-    print(reps)
+    # print(reps)
     occuranceInfo= {}
     for each in reps:
-        occuranceInfo[each[0]] = findLocations(cipher, each[0])
-    print (occuranceInfo)
+        # print(each[0])
+        # print(findLocations(cipher, each[0]))
+        occuranceInfo[each[0]] = findLocations(cipher, str(each[0]))
+# print (occuranceInfo)
     return occuranceInfo
-# def spacing(cipher,repLocations):
-
-# def mostOccuring(d):
-#     '''A: make a list of the dict values and keys
-#        B: Gather the index that these occur at
-#        C: append the max value to mostcommon[]
-#        D: delete the items already appended'''
-#     mostcommon = []
-#     v=list(d.values())
-#     k=list(d.keys())
-#     i = 0
-#     while i < 20:
-#         mostcommon.append((k[v.index(max(v))], v.index(max(v))))
-#         print("test\n\n")
-#         print(mostcommon[-1])
-#         v.remove(mostcommon[-1][0])
-#         k.remove(mostcommon[-1][1])
-#     return mostcommon
 
 def main():
     texty = """DFSAWSXSOJSBMJUVYAUETUWWPDRUTHOOBSWUSWSQMHVSMQRVJFQOCHGFNAOYLGRUWIYLRK
@@ -85,6 +74,6 @@ OYYJVXFMOQPQJFSQYXHRKJGOYFSETHCEXXZPBUWWLVFTZLUKLFRNSDXKIWMTVEMJCFLWMF
 OCZEKIIJUBERJEPHVPLRXGCLNHHKPWHNUMDJBUEHSEFGYWIEJHWPPQMEUVYQLJKIOGPQHD"""
     text = "Hello"
 
-    repLocations(texty)
+    print(repLocations(texty))
 if __name__ == '__main__':
     main()
