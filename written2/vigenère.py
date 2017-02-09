@@ -4,6 +4,7 @@
 from collections import Counter
 from langdetect import detect, detect_langs
 import operator
+from itertools import product
 def findReps(cipher):
     '''Find repeating sequences of characters in our cipher text,
     return them in a Counter'''
@@ -71,30 +72,49 @@ def modOccurances(occuranceInfo):
                     listSpaces.append(index)
         dictSpace[key] = len(listSpaces)
     return dictSpace
+def shiftLetters(letter, text):
+    letterVal = ord(letter)
+    mostCommonLetter = Counter(text).most_common(1)
+    commonLetterVal = ord(mostCommonLetter)
 
 def frequencyAnalysis(text, keylength):
     knownFreq = {'A': 8.167, 'B': 1.492, 'C': 2.782, 'D': 4.253, 'E': 12.702, 'F': 2.228, 'G': 2.015,
     'H': 6.094, 'I': 6.996, 'J': 0.153, 'K': 0.772, 'L': 4.025, 'M': 2.406, 'N': 6.749,
     'O': 7.507, 'P': 1.929, 'Q': 0.095, 'R': 5.987, 'S':6.327, 'T': 9.056, 'U': 2.758,
     'V': 0.978, 'W': 2.360, 'X': 0.150, 'Y': 1.974, 'Z': 0.074}
-    textKey = []
-    for inteach, each in enumerate(text):
-        textKey.append((each, inteach))
-    print(textKey)
+    # textKey = []
+    # for inteach, each in enumerate(text):
+    #     textKey.append((each, inteach))
+    # print(textKey)
+    #
+    # for each in range (1,keylength):
+    #     divEach = []
+    #     for letter in textKey:
+    #         if letter[1]% each == 0:
+    #             divEach.append(letter)
+    #         else:
+    #             continue
+    #     occurances = Counter(divEach)
+    #     mostCommonLetter = occurances.most_common(1)[0]
+    #     print(occurances.most_common(1)[0])
+    #     mostCommonLetterNum = ord(mostCommonLetter[0])
+    #     shift = ord(knownFreq.most_common(1)[0]) - mostCommonLetterNum
+    #     print(shift)
+    #########################################################
+    # for commonLetter in knownFreq.most_common:
+    #     cipherHolder = {}
+    #     for key in range(keylength):
+    #         cipherHolder[key] = []
+    #         for (cipherNumb, cipherLetter) in enumerate(text):
+    #             if cipherNumb % len(key) == key:
+    totalList = []
+    tempList = range(1,27)
+    for key in range(1,keylength+1):
+        totalList.append(list(tempList))
+    print(totalList)
+    x = list(product(*totalList))
+    print(x)
 
-    for each in range (1,keylength):
-        divEach = []
-        for letter in textKey:
-            if letter[1]% each == 0:
-                divEach.append(letter)
-            else:
-                continue
-        occurances = Counter(divEach)
-        mostCommonLetter = occurances.most_common(1)[0]
-        print(occurances.most_common(1)[0])
-        mostCommonLetterNum = ord(mostCommonLetter[0])
-        shift = ord(knownFreq.most_common(1)[0]) - mostCommonLetterNum
-        print(shift)
 
 
 
@@ -123,24 +143,24 @@ def main():
     keyLength = max(moduloOccur, key=moduloOccur.get) #get the most common spacing out of the 20, in our case 7
     # print(keyLength)
     #Now preform the frequency analysis
-    frequencyAnalysis(texty, keyLength)
+    print(frequencyAnalysis(texty, keyLength))
 
-    print(detect_langs("""cryptographyisthepracticeandstudyoftechniquesforsecurecommunicationin
-thepresenceofthirdpartiescalledadversariesmoregenerallyitisaboutconstruc
-tingandanalyzingprotocolsthatovercometheinfluenceofadversariesandwhichar
-erelatedtovariousaspectsininformationsecuritysuchasdataconfidentialityda
-taintegrityauthenticationandnonrepudiationmoderncryptographyintersectsth
-edisciplinesofmathematicscomputerscienceandelectricalengineeringmoderncr
-yptographyisheavilybasedonmathematicaltheoryandcomputersciencepracticecr
-yptographicalgorithmsaredesignedaroundcomputationalhardnessassumptionsma
-kingsuchalgorithmshardtobreakinpracticebyanyadversaryitistheoreticallypo
-ssibletobreaksuchasystembutitisinfeasibletodosobyanyknownpracticalmeansc
-ryptologyrelatedtechnologyhasraisedanumberoflegalissuestheelectronicfron
-tierfoundationwasinvolvedinacaseintheunitedstateswhichquestionedwhetherr
-equiringsuspectedcriminalstoprovidetheirdecryptioraengrgeyufmmseewnudajv
-mdvbbdfnrbtgybhjtsuurzoiqtkrxcpzgjucbqrnlviuisveaiobgrhvaqbnsdbnkmhawsia
-kdqjbcwkqvcvhjbdbdrmntenitcemmvdgbnnhsjuuvmmqc
-"""))
+#     print(detect_langs("""cryptographyisthepracticeandstudyoftechniquesforsecurecommunicationin
+# thepresenceofthirdpartiescalledadversariesmoregenerallyitisaboutconstruc
+# tingandanalyzingprotocolsthatovercometheinfluenceofadversariesandwhichar
+# erelatedtovariousaspectsininformationsecuritysuchasdataconfidentialityda
+# taintegrityauthenticationandnonrepudiationmoderncryptographyintersectsth
+# edisciplinesofmathematicscomputerscienceandelectricalengineeringmoderncr
+# yptographyisheavilybasedonmathematicaltheoryandcomputersciencepracticecr
+# yptographicalgorithmsaredesignedaroundcomputationalhardnessassumptionsma
+# kingsuchalgorithmshardtobreakinpracticebyanyadversaryitistheoreticallypo
+# ssibletobreaksuchasystembutitisinfeasibletodosobyanyknownpracticalmeansc
+# ryptologyrelatedtechnologyhasraisedanumberoflegalissuestheelectronicfron
+# tierfoundationwasinvolvedinacaseintheunitedstateswhichquestionedwhetherr
+# equiringsuspectedcriminalstoprovidetheirdecryptioraengrgeyufmmseewnudajv
+# mdvbbdfnrbtgybhjtsuurzoiqtkrxcpzgjucbqrnlviuisveaiobgrhvaqbnsdbnkmhawsia
+# kdqjbcwkqvcvhjbdbdrmntenitcemmvdgbnnhsjuuvmmqc
+# """))
 
 
 if __name__ == '__main__':
