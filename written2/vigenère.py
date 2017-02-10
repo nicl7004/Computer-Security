@@ -23,7 +23,7 @@ def findReps(cipher):
         # print(each)
         if len(each[0]) >=3 and len(each[0]) <=10 and each[1] == 3:
             nGrams.append(each)
-    print(nGrams)
+    # print(nGrams)
     return (nGrams)
 
 def findLocations(cipher,chars):
@@ -41,7 +41,7 @@ def findLocations(cipher,chars):
             return locations
         locations.append(start)
         start += len(chars)
-    print(locations)
+    #  print(locations)
     return(locations)
 
 def repLocations(cipher):
@@ -77,7 +77,7 @@ def shiftLetters(letter, text):
     mostCommonLetter = Counter(text).most_common(1)
     commonLetterVal = ord(mostCommonLetter)
 
-def frequencyAnalysis(text, keylength):
+def bruteForce(texty, keyLength):
     knownFreq = {'A': 8.167, 'B': 1.492, 'C': 2.782, 'D': 4.253, 'E': 12.702, 'F': 2.228, 'G': 2.015,
     'H': 6.094, 'I': 6.996, 'J': 0.153, 'K': 0.772, 'L': 4.025, 'M': 2.406, 'N': 6.749,
     'O': 7.507, 'P': 1.929, 'Q': 0.095, 'R': 5.987, 'S':6.327, 'T': 9.056, 'U': 2.758,
@@ -107,13 +107,77 @@ def frequencyAnalysis(text, keylength):
     #         cipherHolder[key] = []
     #         for (cipherNumb, cipherLetter) in enumerate(text):
     #             if cipherNumb % len(key) == key:
-    totalList = []
-    tempList = range(1,27)
-    for key in range(1,keylength+1):
-        totalList.append(list(tempList))
-    print(totalList)
-    x = list(product(*totalList))
-    print(x)
+    x = range(0,26)
+    z=(product(x,repeat=keyLength))
+
+    # print(len(z))
+    x = 0
+    tempTexty = texty
+    for layout in z:
+        print("Iteration Number:",x)
+        x+=1
+        for (intLetter, letter) in enumerate(texty):
+            # print(x)
+            # x+=1
+            for (intshiftBy, shiftBy) in enumerate(layout):
+                # print(x)
+                # x+=1
+                if (intLetter % keyLength) == intshiftBy:
+                    order = (ord(letter) + shiftBy)
+                    if order>ord('Z'): #in the case of order being greater than z
+                        order = ord('A') +((ord(letter)+shiftBy) - ord('Z'))
+                    tempTexty[intLetter].replace(tempTexty[intLetter], chr(order)) #replace old char with new char
+                    detectionRate=detect(tempTexty)
+
+                    if detectionRate == "en":
+                        print("Success!!!")
+                        print(detectionRate)
+                        print(tempTexty)
+                        return(tempTexty)
+                        # return(tempTexty)
+
+    return(100)
+
+
+def frequencyAnalysis(texty, keyLength):
+    knownFreq = {'A': 8.167, 'B': 1.492, 'C': 2.782, 'D': 4.253, 'E': 12.702, 'F': 2.228, 'G': 2.015,
+    'H': 6.094, 'I': 6.996, 'J': 0.153, 'K': 0.772, 'L': 4.025, 'M': 2.406, 'N': 6.749,
+    'O': 7.507, 'P': 1.929, 'Q': 0.095, 'R': 5.987, 'S':6.327, 'T': 9.056, 'U': 2.758,
+    'V': 0.978, 'W': 2.360, 'X': 0.150, 'Y': 1.974, 'Z': 0.074}
+    occuranceInfo = {}
+    for key in range(keyLength):
+        occurances = []
+        for (intLetter, letter) in enumerate(texty):
+            if intLetter % keyLength == key:
+                occurances.append(letter)
+        occuranceInfo[key] = occurances
+
+    # print(occuranceInfo)
+    for common in knownFreq.most_common():
+        for key in range(keyLength):
+            currentOccur = Counter(occuranceInfo[key])
+            currentOccur = currentOccur.most_common(1)
+            print(currentOccur)
+
+
+
+
+    # # product('ABCD', 'xy') --> Ax Ay Bx By Cx Cy Dx Dy
+    # # product(range(2), repeat=3) --> 000 001 010 011 100 101 110 111
+    # pools = [tuple(pool) for pool in text] * keyLength
+    # result = [[]]
+    # for pool in pools:
+    #     result = [x+[y] for x in result for y in pool]
+    # for prod in result:
+    #     print(tuple(prod))
+    #     yield tuple(prod)
+    # totalList = []
+    # tempList = range(1,27)
+    # for key in range(1,keylength+1):
+    #     totalList.append(list(tempList))
+    # print(totalList)
+    # x = list(product(*totalList))
+    # print(x)
 
 
 
@@ -143,7 +207,8 @@ def main():
     keyLength = max(moduloOccur, key=moduloOccur.get) #get the most common spacing out of the 20, in our case 7
     # print(keyLength)
     #Now preform the frequency analysis
-    print(frequencyAnalysis(texty, keyLength))
+    # print(bruteForce(texty, keyLength))
+    frequencyAnalysis(texty, keyLength)
 
 #     print(detect_langs("""cryptographyisthepracticeandstudyoftechniquesforsecurecommunicationin
 # thepresenceofthirdpartiescalledadversariesmoregenerallyitisaboutconstruc
