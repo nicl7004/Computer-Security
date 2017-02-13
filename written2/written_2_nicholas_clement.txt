@@ -1,10 +1,11 @@
-'''Nicholas Clement
-   Crack the vigenere cipher with the Kasiski examination method'''
+Nicholas Clement
+103151912
 
-from collections import Counter
-from langdetect import detect, detect_langs
-import operator
-from itertools import product
+# Problem 1:
+Key = BOULDER
+
+Method used to break the Vigenère cipher was the Kasiski examination.  The Kasiski examination allows us to deduce the length of the keyword.  The key to determining the length of the keyword lies in repeating substrings.  Here are some python functions I wrote to find all of the repetitions in the cipher text, and then compare the different spacing of these substrings.  Finally I check which substrings repeat every n spaces, and based on the highest value of n determine the key length.
+---------------------------------------------------------------------------------------------------------------
 def findReps(cipher):
     '''Find repeating sequences of characters in our cipher text,
     return them in a Counter'''
@@ -72,46 +73,10 @@ def modOccurances(occuranceInfo):
                     listSpaces.append(index)
         dictSpace[key] = len(listSpaces)
     return dictSpace
-def shiftLetters(letter, text):
-    letterVal = ord(letter)
-    mostCommonLetter = Counter(text).most_common(1)
-    commonLetterVal = ord(mostCommonLetter)
 
-def bruteForce(texty, keyLength):
-    knownFreq = {'A': 8.167, 'B': 1.492, 'C': 2.782, 'D': 4.253, 'E': 12.702, 'F': 2.228, 'G': 2.015,
-    'H': 6.094, 'I': 6.996, 'J': 0.153, 'K': 0.772, 'L': 4.025, 'M': 2.406, 'N': 6.749,
-    'O': 7.507, 'P': 1.929, 'Q': 0.095, 'R': 5.987, 'S':6.327, 'T': 9.056, 'U': 2.758,
-    'V': 0.978, 'W': 2.360, 'X': 0.150, 'Y': 1.974, 'Z': 0.074}
-
-    x = range(0,26)
-    z=(product(x,repeat=keyLength))
-
-
-    x = 0
-    tempTexty = texty
-    for layout in z:
-        print("Iteration Number:",x)
-        x+=1
-        for (intLetter, letter) in enumerate(texty):
-
-            for (intshiftBy, shiftBy) in enumerate(layout):
-
-                if (intLetter % keyLength) == intshiftBy:
-                    order = (ord(letter) + shiftBy)
-                    if order>ord('Z'): #in the case of order being greater than z
-                        order = ord('A') +((ord(letter)+shiftBy) - ord('Z'))
-                    tempTexty[intLetter].replace(tempTexty[intLetter], chr(order)) #replace old char with new char
-                    detectionRate=detect(tempTexty)
-
-                    if detectionRate == "en":
-                        print("Success!!!")
-                        print(detectionRate)
-                        print(tempTexty)
-                        return(tempTexty)
-
-    return(100)
-
-
+---------------------------------------------------------------------------------------------------------------
+Now since we know the length of the key (in our case 7) we know that we can use every nth index of our cipher text as a Caesar cipher.  This is where frequency analysis comes into play, by knowing the frequencies of letters in each of the 7 Cesar ciphers we can compare to the relative frequency of the English alphabet.  My attempted implementation of frequency analysis worked partially, I was able to deduce that the key looked like boulder although my program didn’t come to that conclusion on its own.  Here is the code I wrote for this part:
+---------------------------------------------------------------------------------------------------------------
 def frequencyAnalysis(texty, keyLength):
     knownFreq = {'A': 8.167, 'B': 1.492, 'C': 2.782, 'D': 4.253, 'E': 12.702, 'F': 2.228, 'G': 2.015,
     'H': 6.094, 'I': 6.996, 'J': 0.153, 'K': 0.772, 'L': 4.025, 'M': 2.406, 'N': 6.749,
@@ -162,6 +127,55 @@ def frequencyAnalysis(texty, keyLength):
                 return
             else:
                 print("Detection Rate =", detect_langs(str("".join(tempTexty))), "\n\n")
+---------------------------------------------------------------------------------------------------------------
+You may notice that I used the function detect_langs, this comes from the python langdetect package that is ported from googles language detection abilities. Another approach I used didn’t focus on frequency analysis, it attempted to brute force the solution by taking the Cartesian products of the different possible shifts of all 7 sub-ciphers.  Here is that code:
+---------------------------------------------------------------------------------------------------------------
+def bruteForce(texty, keyLength):
+x = range(0,26)
+    z=(product(x,repeat=keyLength))
+
+
+    x = 0
+    tempTexty = texty
+    for layout in z:
+        print("Iteration Number:",x)
+        x+=1
+        for (intLetter, letter) in enumerate(texty):
+
+            for (intshiftBy, shiftBy) in enumerate(layout):
+
+                if (intLetter % keyLength) == intshiftBy:
+                    order = (ord(letter) + shiftBy)
+                    if order>ord('Z'): #in the case of order being greater than z
+                        order = ord('A') +((ord(letter)+shiftBy) - ord('Z'))
+                    tempTexty[intLetter].replace(tempTexty[intLetter], chr(order)) #replace old char with new char
+                    detectionRate=detect(tempTexty)
+
+                    if detectionRate == "en":
+                        print("Success!!!")
+                        print(detectionRate)
+                        print(tempTexty)
+                        return(tempTexty)
+
+    return(100)
+---------------------------------------------------------------------------------------------------------------
+Sadly this program would take days to run to completion, with there being 26 possible shifts for all 7 ciphers we end up with 26^7 possible answers to check, leaving us with a little more than eight billion possible plaintext solutions, all of which need to be checked to determine if they are English.
+
+Dictionary Attack:
+
+# Problem 2:
+part_a_var_english=10.405667735207103
+part_b_var_plaintext=955.3668639053257
+part_b_var_plaintext = [PopVar of yz: 487.9822485207101, PopVar of xyz: 295.5207100591716, PopVar of wxyz: 226.21301775147927, PopVar of vwxyz: 151.98224852071007, PopVar of uvwxyz: 134.67455621301775]
+part_c_explain= It is clear that with the increase in key length the population variance decreases.  We know that variance is a measure of deviation from the mean, so we can conclude with a longer key comes a more equally distributed randomness between letters. This is why our population variance decreases.
+Part_d_means=[238.46152777777772, 106.02163204009794, 60.56617802417325, 40.22507359456148, 28.292735204159715]
+Part_d_explain= These frequency variances are unlike those in both parts B and C. This is because we are calculating the frequency of n parts of the cipher text independently, whereas in part B we took the plaintext as a whole and part C we took each cipher text as a whole.  A similar trend exists in parts B and C where the population variance decreases as the key length increases.
+Part_e_means = [34.611570247933884, 32.33884297520662, 21.059917355371898, 26.423553719008268, 20.66493055555555, 34.65759637188208]
+Part_e_explain = Given the different means above, we can see that the general population variance is similar to that of the natural English language.  This shows that after determining the length of different keys (via the Kasiski examination) each individual cipher might be vulnerable to a frequency analysis attack.
+
+Source code for Problem 2:
+---------------------------------------------------------------------------------------------------------------------
+
 def mean(data):
     total = 0
     for each in data:
@@ -198,28 +212,12 @@ def splitPopVar(data, keyLength):
     print(popVars)
     return(total/len(popVars))
 
-def dictAttack(texty, keyLength):
-    with open(dicts.txt) as dictionary:
-    for line in dictionary:
-        if len(str(line)) = keyLength:
-            
-
 def main():
-    texty = """DFSAWSXSOJSBMJUVYAUETUWWPDRUTHOOBSWUSWSQMHVSMQRVJFQOCHGFNAOYLGRUWIYLRKISJCHWVOQYZIXYJFXADVKJSMNDPCFRUOYIITOLTHWDPFYRHRVSOFWBMKJGUMRYKDCHDWVLDHCYJEEEOHLOCQJBAAUSKPQIWVXYBHIGHVTPAYEKIZOTFFHRTFCZLGZVSGUCLIJBBXHKMTIOLPUICBHYOWSMBFCZXWRTDYNWWZOWHQRVDBHCZQWVDILTWCJVQBLVHRUOWZQJZESHELECJHSODXRJBNPJVZUMUFWLVOHCNDXZPBUYGRFOFYAXHZBHCZQQFESLYFVPQHIRUEGIMCYWIITSWEVXYFRCDFMGMWHPVSWNONSHQRUWWDFSDQINPUWTJSHNHEEESFPFXIJQUWHRXJBYPUMEHAIOHVEDFSAWSXSOJSBMJISUGLPPCOMPGSENONSHQRUWWLOXYFCLJDRUDCGAXXVSGWTHRTFDLLFXZDSWCBTKPULLSLZDOFRRVZUVGDDVVESMTJRVEOLZXRUDCGAXXRUWIYDPYBFXYHWJBGMFPTKJCHDPEBJBADXGYBZAZUMKIAMSDVUUCVCHEBJBJCDGKJQYMBEEZOXGHVJBFSTWMJUVYZUIKJQUWOCGPGMTEPVUCVCHEBTIWSDWPTHYXEYKJHCDLRWFOMTEPVUCXZVSSZOHJNRFXBJCDGKJQUWPIROGWCBTKPZIRBVVMONPGXVDVHZOSXZVUDUEZTSXLQYDCSLZIPVHOFTVWLFGNSHICFQNCRRZDTLZQXZFFZZXRUBHCZQARTWHGRPMFRCYDGRTSCYWLVVBCEHHJUONPVAYJQBBXIJUWIYHHNISNSHVIFEOTUMEHGODSITUSXNUMDJBUWVXFQFIGLHVUVYTUHVDFSAWMFSOYYJVXFMOQPQJFSQYXHRKJGOYFSETHCEXXZPBUWWLVFTZLUKLFRNSDXKIWMTVEMJCFLWMFOCZEKIIJUBERJEPHVPLRXGCLNHHKPWHNUMDJBUEHSEFGYWIEJHWPPQMEUVYQLJKIOGPQHD"""
-    text = "Hello"
-    knownFreq = {'A': 8.167, 'B': 1.492, 'C': 2.782, 'D': 4.253, 'E': 12.702, 'F': 2.228, 'G': 2.015,
+knownFreq = {'A': 8.167, 'B': 1.492, 'C': 2.782, 'D': 4.253, 'E': 12.702, 'F': 2.228, 'G': 2.015,
     'H': 6.094, 'I': 6.996, 'J': 0.153, 'K': 0.772, 'L': 4.025, 'M': 2.406, 'N': 6.749,
     'O': 7.507, 'P': 1.929, 'Q': 0.095, 'R': 5.987, 'S':6.327, 'T': 9.056, 'U': 2.758,
     'V': 0.978, 'W': 2.360, 'X': 0.150, 'Y': 1.974, 'Z': 0.074}
-
-
-    # x = repLocations(texty)
-    # moduloOccur = modOccurances(x) #get the different possible key lengths of 2-20
-    # keyLength = max(moduloOccur, key=moduloOccur.get) #get the most common spacing out of the 20, in our case 7
-    # frequencyAnalysis(texty, keyLength)
-
-    # print(popVar(knownFreq))
-    plainText = Counter("ethicslawanduniversitypoliciestodefendasystemyouneedtobeabletothinklikeanattackerandthatincludesunderstandingtechniquesthatcanbeusedtocompromisesecurityhoweverusingthosetechniquesintherealworldmayviolatethelawortheuniversitysrulesanditmaybeunethicalundersomecircumstancesevenprobingforweaknessesmayresultinseverepenaltiesuptoandincludingexpulsioncivilfinesandjailtimeourpolicyineecsisthatyoumustrespecttheprivacyandpropertyrightsofothersatalltimesorelseyouwillfailthecourseactinglawfullyandethicallyisyourresponsibilitycarefullyreadthecomputerfraudandabuseactcfaaafederalstatutethatbroadlycriminalizescomputerintrusionthisisoneofseverallawsthatgovernhackingunderstandwhatthelawprohibitsyoudontwanttoenduplikethisguyifindoubtwecanreferyoutoanattorneypleasereviewitsspoliciesonresponsibleuseoftechnologyresourcesandcaenspolicydocumentsforguidelinesconcerningproperuseofinformationtechnologyatumaswellastheengineeringhonorcodeasmembersoftheuniversitycommunityyouarerequiredtoabidebyt")
+plainText = Counter("ethicslawanduniversitypoliciestodefendasystemyouneedtobeabletothinklikeanattackerandthatincludesunderstandingtechniquesthatcanbeusedtocompromisesecurityhoweverusingthosetechniquesintherealworldmayviolatethelawortheuniversitysrulesanditmaybeunethicalundersomecircumstancesevenprobingforweaknessesmayresultinseverepenaltiesuptoandincludingexpulsioncivilfinesandjailtimeourpolicyineecsisthatyoumustrespecttheprivacyandpropertyrightsofothersatalltimesorelseyouwillfailthecourseactinglawfullyandethicallyisyourresponsibilitycarefullyreadthecomputerfraudandabuseactcfaaafederalstatutethatbroadlycriminalizescomputerintrusionthisisoneofseverallawsthatgovernhackingunderstandwhatthelawprohibitsyoudontwanttoenduplikethisguyifindoubtwecanreferyoutoanattorneypleasereviewitsspoliciesonresponsibleuseoftechnologyresourcesandcaenspolicydocumentsforguidelinesconcerningproperuseofinformationtechnologyatumaswellastheengineeringhonorcodeasmembersoftheuniversitycommunityyouarerequiredtoabidebyt")
     yzKey = ("csfharjzuzlcsmgucqqhrxnnjhahcrrnbdddlcyrwrrdkxmtldccrnzdyajdrnrggmikgjczlzrsybidpzlcrgysgmaksccrsmbdprrzlcgmescbfmgpsdqsfzrbymzdsrccrnankopnkhqdqdatphrxfnudtdptqhlfrgmrcscbfmgpsdqhlsfdpdykunpkblyxthmkyscsfdjzunpsfdsmgucqqhrxqqskcrymbhrlyxzdsmcsfhazjtlccqqnkdahpbslqsymadqdtdlopnzhlfdnpvczimcrqdqlyxpdqtjsgmqdtdpdndlzjsgdqtnsmzlcgmakscgmedvoskqhmmahthjegmcrymbiyhjsglcnsqnnjhaxgmcdargrrgyswnslsrrqcrndasrgcophtzaxymbopnndpswqgffsqndnrgcqqzrzjkrhkdqnpdjrcxmtuhjkdzgkrgcbmtprczasgmekyvdtjkwzlccsfhazjkwhqxmtpqcrnnlrgagkgswbyqceskjxpdycrgcbmlntrdpepzscymbzztqdybrbdzyzddbdpzjrrzrtrdrgyszqmzbkwbphkhlzjhxdqbmlntrdphlsptqhmmrggrgrmmcndrcucqykjzurrgysentdpmfzajgmetlccqqsymbvfzrsfdjzuopnfhzhrrwnscmmrvymrsmdlcsojhidrggretwhdhlcmtzsudazlqcecqwnssmzlzrsmqldwojdyrcqcugduhrrqomkgbgdqnlqcrnnlrgajdsrcndscbfmmkmfwqcrmtpbcrymbbydlrnnjhaxbnatkdlsqemqetgcckgmcranlbcqlhlfnqmocqsrcndhlemqkzrhmmrdaglnjnexysslyrudjkyrrgcdlfgmcdphlffnlnpbmcczqlclzdprmergctlhtdprgswbmlktlhrxwnszpdpdotgqccrnyagccaws")
     xyzKey = ("brgfariyvxlcrlhscqpgsvnnigbfcrqmcbddkbzpwrqclvmtkcdarnyczyjdqmsegmhjhhczkysqybhcqxlcqfzqgmzjtacrrlcbprqymagmdrdzfmfotbqseyszymyctpccqmblkoomlfqdpcbrphqwgludscqrqhkesemrbrdzfmfotbqhkrgbpdxjvlpkakzvthljzqcseckxunorgbsmftdoqhqwroskbqzkbhqkzvzdrldqfhzykrlcbprlkdzgqzslprzkadpcubloomaflfcmqtczhldpqdpkzvpdpskqgmpcubpdmcmxjsfcrrnslymagmzjtagmdcwmskpgnkahsgkcgmbqzkbixgkqglbmtonnigbvgmbcbpgrqfzqwnrktprqbqobasqfdmphsybvymanqlndorxogferrldnqfdoqzqykirhjcrlpdiqdvmttgkidzfjsecblsqpczzrhkekxuerjkvymacsegbxjkvgrvmtopdpnnkqhygkfrxzyqbdtijxoczargbanjntqcqcpzrbzkbzysrbybqaexyzcccbpziqsxrtqcseysypnxbkvaqfkhkykfxdpanjntqcqflsosrfmmqfhpgrlldldrbtdoykiyvprgxrfltdolgxajflfrlcbprqymaugxrseckxuoomgfzhqqxlscllstymqrnblcrnkfidqfhpetvgeflclsaqudzymocebpxlsslymxrslpmbwoiczpcqbthbuhqqrmmkfahbqnkpdpnnkqhyjdrqdldsbagkmklexocrlsqzcrxlczydkqoljhzwclatjcmqqelpfrgcbjhkcrzmmzcqkgmdnqlndosrbmeflelplxrhllsbagkmklexxrtjyrtckiyrqfdblffldbphkegllnoanaczpkdjzdoqncrgbsmftdoqhqwblklrlhqwxlszocqbotfpdarnxzhacavr")
     wxyzKey = ("aqfhypjzsxlcqkguaoqhpvnnhfahaprnzbddjayruprdivmtjbccplzdwyjdplrgekikehczjxrswzidnxlcpeysekakqacrqkbdnprzjagmcqcbdkgpqbqsdxrbwkzdqpccplanimpnifqdobatnfrxdludrbptoflfpemraqcbdkgpqbqhjqfdnbykslpkzjyxrfmkwqcsdbjzslpsdbsmescqofrxooskapymzfrlwvzdqkcsdfazhrlcaoqnibahnzsloqymybqdrblonlzhjddnntczgkcrobqlwvpdorjsekqdrbpdlblzhqgdornskxlcekakqagmcbvoqiqhkkahrfjeekcrwkbiwfjsejcnqonnhfaxekcdypgrpeysulslqprqapndyqrgamphrxaxwkbonlndnqwqedfsoldnpecqoxrzhirhibqnnbjravmtsfjkbxgkpecbkrpraxasekekwtdthiwzjacsdfazhiwhovmtnocrlllreygkeqwbwoceqijxnbycpecbkjntpbpenxscwkbzxrqdwzrbbxyzbbbdnxjrpxrtpbrgwqzqkxbkuzphiflzhfxdozmllrrdnflsnrqhkkrgepgrkkcnbpcuaoykhxurpeyscltdnkfzyhgmcrlcaoqswkbvdxrsdbjzsmpndfzhppwnqammptympqmdjasohfidpegrcrwhbflckrzssbazjoceaownqqmzjxrskoldumjdwpcqasgdsfrrommkezgdollqapnnjpgahbsraldsazfmkimfuocrkrpbapymzzydjpnnhfaxzlatiblsocmqcrgcaigmapanjzcqjflflomoaosraldhjcmqixrhkkrdyelnhlexwqslwpudhiyrpecdjdgmabphjdfnjlpbkaczojclxbprkcrgarlhrbpreqwbkjktjfrxulsznbpdmrgqaarnwygcayws")
@@ -238,24 +236,3 @@ def main():
     print(splitPopVar(wxyzKey,4))
     print(splitPopVar(vwxyzKey,5))
     print(splitPopVar(uvwxyzKey,6))
-
-#     print(detect_langs("""cryptographyisthepracticeandstudyoftechniquesforsecurecommunicationin
-# thepresenceofthirdpartiescalledadversariesmoregenerallyitisaboutconstruc
-# tingandanalyzingprotocolsthatovercometheinfluenceofadversariesandwhichar
-# erelatedtovariousaspectsininformationsecuritysuchasdataconfidentialityda
-# taintegrityauthenticationandnonrepudiationmoderncryptographyintersectsth
-# edisciplinesofmathematicscomputerscienceandelectricalengineeringmoderncr
-# yptographyisheavilybasedonmathematicaltheoryandcomputersciencepracticecr
-# yptographicalgorithmsaredesignedaroundcomputationalhardnessassumptionsma
-# kingsuchalgorithmshardtobreakinpracticebyanyadversaryitistheoreticallypo
-# ssibletobreaksuchasystembutitisinfeasibletodosobyanyknownpracticalmeansc
-# ryptologyrelatedtechnologyhasraisedanumberoflegalissuestheelectronicfron
-# tierfoundationwasinvolvedinacaseintheunitedstateswhichquestionedwhetherr
-# equiringsuspectedcriminalstoprovidetheirdecryptioraengrgeyufmmseewnudajv
-# mdvbbdfnrbtgybhjtsuurzoiqtkrxcpzgjucbqrnlviuisveaiobgrhvaqbnsdbnkmhawsia
-# kdqjbcwkqvcvhjbdbdrmntenitcemmvdgbnnhsjuuvmmqc
-# """))
-
-
-if __name__ == '__main__':
-    main()
