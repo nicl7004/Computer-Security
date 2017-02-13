@@ -198,11 +198,59 @@ def splitPopVar(data, keyLength):
     print(popVars)
     return(total/len(popVars))
 
+
 def dictAttack(texty, keyLength):
-    with open(dicts.txt) as dictionary:
-    for line in dictionary:
-        if len(str(line)) = keyLength:
-            
+    occurances = {}
+    with open("dicts.txt", 'r') as dictionary:
+        
+        for line in dictionary:
+            print(line)
+            print(str(line))
+
+            tempTexty = list(texty)
+
+            if len(str(line)) == keyLength:
+                # print("Keylength == wordLength")
+                for (intchar, char) in enumerate(str(line)):
+
+                    # print(intchar)
+
+                    for (intletter,letter) in enumerate(texty):
+
+                        if intletter % keyLength == intchar:
+
+                            print(char)
+                            print()
+                            shiftBy = (ord(char) + (ord(letter) - ord("A")))
+
+                            print(shiftBy)
+                            order = 0
+
+                            if shiftBy >= ord('Z'): #in the case of order being greater than z
+                                order = ((shiftBy) - ord('Z')) +ord("A") -1
+
+                                print("Key letter is:", char)
+                                print("Replaced", tempTexty[intletter], "with", chr(order))
+                                tempTexty[intletter] = chr(order)
+
+                            else:
+                                print("Key letter is:", char)
+                                print("Replaced", tempTexty[intletter], "with", chr(shiftBy))
+                                tempTexty[intletter] = chr(shiftBy+1) #replace old char with new char
+
+                    if detect_langs(str("".join(tempTexty)))[0] == "en":
+                    # str("".join(tempTexty))) == 'en':
+                        print("Success")
+                        print(str("".join(tempTexty)))
+
+                    else:
+                        continue
+                        # print("Detection Rate =", detect_langs(str("".join(tempTexty))), "\n\n")
+
+            elif(line == "BOULDER"):
+                return
+
+
 
 def main():
     texty = """DFSAWSXSOJSBMJUVYAUETUWWPDRUTHOOBSWUSWSQMHVSMQRVJFQOCHGFNAOYLGRUWIYLRKISJCHWVOQYZIXYJFXADVKJSMNDPCFRUOYIITOLTHWDPFYRHRVSOFWBMKJGUMRYKDCHDWVLDHCYJEEEOHLOCQJBAAUSKPQIWVXYBHIGHVTPAYEKIZOTFFHRTFCZLGZVSGUCLIJBBXHKMTIOLPUICBHYOWSMBFCZXWRTDYNWWZOWHQRVDBHCZQWVDILTWCJVQBLVHRUOWZQJZESHELECJHSODXRJBNPJVZUMUFWLVOHCNDXZPBUYGRFOFYAXHZBHCZQQFESLYFVPQHIRUEGIMCYWIITSWEVXYFRCDFMGMWHPVSWNONSHQRUWWDFSDQINPUWTJSHNHEEESFPFXIJQUWHRXJBYPUMEHAIOHVEDFSAWSXSOJSBMJISUGLPPCOMPGSENONSHQRUWWLOXYFCLJDRUDCGAXXVSGWTHRTFDLLFXZDSWCBTKPULLSLZDOFRRVZUVGDDVVESMTJRVEOLZXRUDCGAXXRUWIYDPYBFXYHWJBGMFPTKJCHDPEBJBADXGYBZAZUMKIAMSDVUUCVCHEBJBJCDGKJQYMBEEZOXGHVJBFSTWMJUVYZUIKJQUWOCGPGMTEPVUCVCHEBTIWSDWPTHYXEYKJHCDLRWFOMTEPVUCXZVSSZOHJNRFXBJCDGKJQUWPIROGWCBTKPZIRBVVMONPGXVDVHZOSXZVUDUEZTSXLQYDCSLZIPVHOFTVWLFGNSHICFQNCRRZDTLZQXZFFZZXRUBHCZQARTWHGRPMFRCYDGRTSCYWLVVBCEHHJUONPVAYJQBBXIJUWIYHHNISNSHVIFEOTUMEHGODSITUSXNUMDJBUWVXFQFIGLHVUVYTUHVDFSAWMFSOYYJVXFMOQPQJFSQYXHRKJGOYFSETHCEXXZPBUWWLVFTZLUKLFRNSDXKIWMTVEMJCFLWMFOCZEKIIJUBERJEPHVPLRXGCLNHHKPWHNUMDJBUEHSEFGYWIEJHWPPQMEUVYQLJKIOGPQHD"""
@@ -213,31 +261,33 @@ def main():
     'V': 0.978, 'W': 2.360, 'X': 0.150, 'Y': 1.974, 'Z': 0.074}
 
 
-    # x = repLocations(texty)
-    # moduloOccur = modOccurances(x) #get the different possible key lengths of 2-20
-    # keyLength = max(moduloOccur, key=moduloOccur.get) #get the most common spacing out of the 20, in our case 7
-    # frequencyAnalysis(texty, keyLength)
+    x = repLocations(texty)
+    moduloOccur = modOccurances(x) #get the different possible key lengths of 2-20
+    keyLength = max(moduloOccur, key=moduloOccur.get) #get the most common spacing out of the 20, in our case 7
+    x = dictAttack(texty, keyLength)
+    # # frequencyAnalysis(texty, keyLength)
+    #
+    # # print(popVar(knownFreq))
+    # plainText = Counter("ethicslawanduniversitypoliciestodefendasystemyouneedtobeabletothinklikeanattackerandthatincludesunderstandingtechniquesthatcanbeusedtocompromisesecurityhoweverusingthosetechniquesintherealworldmayviolatethelawortheuniversitysrulesanditmaybeunethicalundersomecircumstancesevenprobingforweaknessesmayresultinseverepenaltiesuptoandincludingexpulsioncivilfinesandjailtimeourpolicyineecsisthatyoumustrespecttheprivacyandpropertyrightsofothersatalltimesorelseyouwillfailthecourseactinglawfullyandethicallyisyourresponsibilitycarefullyreadthecomputerfraudandabuseactcfaaafederalstatutethatbroadlycriminalizescomputerintrusionthisisoneofseverallawsthatgovernhackingunderstandwhatthelawprohibitsyoudontwanttoenduplikethisguyifindoubtwecanreferyoutoanattorneypleasereviewitsspoliciesonresponsibleuseoftechnologyresourcesandcaenspolicydocumentsforguidelinesconcerningproperuseofinformationtechnologyatumaswellastheengineeringhonorcodeasmembersoftheuniversitycommunityyouarerequiredtoabidebyt")
+    # yzKey = ("csfharjzuzlcsmgucqqhrxnnjhahcrrnbdddlcyrwrrdkxmtldccrnzdyajdrnrggmikgjczlzrsybidpzlcrgysgmaksccrsmbdprrzlcgmescbfmgpsdqsfzrbymzdsrccrnankopnkhqdqdatphrxfnudtdptqhlfrgmrcscbfmgpsdqhlsfdpdykunpkblyxthmkyscsfdjzunpsfdsmgucqqhrxqqskcrymbhrlyxzdsmcsfhazjtlccqqnkdahpbslqsymadqdtdlopnzhlfdnpvczimcrqdqlyxpdqtjsgmqdtdpdndlzjsgdqtnsmzlcgmakscgmedvoskqhmmahthjegmcrymbiyhjsglcnsqnnjhaxgmcdargrrgyswnslsrrqcrndasrgcophtzaxymbopnndpswqgffsqndnrgcqqzrzjkrhkdqnpdjrcxmtuhjkdzgkrgcbmtprczasgmekyvdtjkwzlccsfhazjkwhqxmtpqcrnnlrgagkgswbyqceskjxpdycrgcbmlntrdpepzscymbzztqdybrbdzyzddbdpzjrrzrtrdrgyszqmzbkwbphkhlzjhxdqbmlntrdphlsptqhmmrggrgrmmcndrcucqykjzurrgysentdpmfzajgmetlccqqsymbvfzrsfdjzuopnfhzhrrwnscmmrvymrsmdlcsojhidrggretwhdhlcmtzsudazlqcecqwnssmzlzrsmqldwojdyrcqcugduhrrqomkgbgdqnlqcrnnlrgajdsrcndscbfmmkmfwqcrmtpbcrymbbydlrnnjhaxbnatkdlsqemqetgcckgmcranlbcqlhlfnqmocqsrcndhlemqkzrhmmrdaglnjnexysslyrudjkyrrgcdlfgmcdphlffnlnpbmcczqlclzdprmergctlhtdprgswbmlktlhrxwnszpdpdotgqccrnyagccaws")
+    # xyzKey = ("brgfariyvxlcrlhscqpgsvnnigbfcrqmcbddkbzpwrqclvmtkcdarnyczyjdqmsegmhjhhczkysqybhcqxlcqfzqgmzjtacrrlcbprqymagmdrdzfmfotbqseyszymyctpccqmblkoomlfqdpcbrphqwgludscqrqhkesemrbrdzfmfotbqhkrgbpdxjvlpkakzvthljzqcseckxunorgbsmftdoqhqwroskbqzkbhqkzvzdrldqfhzykrlcbprlkdzgqzslprzkadpcubloomaflfcmqtczhldpqdpkzvpdpskqgmpcubpdmcmxjsfcrrnslymagmzjtagmdcwmskpgnkahsgkcgmbqzkbixgkqglbmtonnigbvgmbcbpgrqfzqwnrktprqbqobasqfdmphsybvymanqlndorxogferrldnqfdoqzqykirhjcrlpdiqdvmttgkidzfjsecblsqpczzrhkekxuerjkvymacsegbxjkvgrvmtopdpnnkqhygkfrxzyqbdtijxoczargbanjntqcqcpzrbzkbzysrbybqaexyzcccbpziqsxrtqcseysypnxbkvaqfkhkykfxdpanjntqcqflsosrfmmqfhpgrlldldrbtdoykiyvprgxrfltdolgxajflfrlcbprqymaugxrseckxuoomgfzhqqxlscllstymqrnblcrnkfidqfhpetvgeflclsaqudzymocebpxlsslymxrslpmbwoiczpcqbthbuhqqrmmkfahbqnkpdpnnkqhyjdrqdldsbagkmklexocrlsqzcrxlczydkqoljhzwclatjcmqqelpfrgcbjhkcrzmmzcqkgmdnqlndosrbmeflelplxrhllsbagkmklexxrtjyrtckiyrqfdblffldbphkegllnoanaczpkdjzdoqncrgbsmftdoqhqwblklrlhqwxlszocqbotfpdarnxzhacavr")
+    # wxyzKey = ("aqfhypjzsxlcqkguaoqhpvnnhfahaprnzbddjayruprdivmtjbccplzdwyjdplrgekikehczjxrswzidnxlcpeysekakqacrqkbdnprzjagmcqcbdkgpqbqsdxrbwkzdqpccplanimpnifqdobatnfrxdludrbptoflfpemraqcbdkgpqbqhjqfdnbykslpkzjyxrfmkwqcsdbjzslpsdbsmescqofrxooskapymzfrlwvzdqkcsdfazhrlcaoqnibahnzsloqymybqdrblonlzhjddnntczgkcrobqlwvpdorjsekqdrbpdlblzhqgdornskxlcekakqagmcbvoqiqhkkahrfjeekcrwkbiwfjsejcnqonnhfaxekcdypgrpeysulslqprqapndyqrgamphrxaxwkbonlndnqwqedfsoldnpecqoxrzhirhibqnnbjravmtsfjkbxgkpecbkrpraxasekekwtdthiwzjacsdfazhiwhovmtnocrlllreygkeqwbwoceqijxnbycpecbkjntpbpenxscwkbzxrqdwzrbbxyzbbbdnxjrpxrtpbrgwqzqkxbkuzphiflzhfxdozmllrrdnflsnrqhkkrgepgrkkcnbpcuaoykhxurpeyscltdnkfzyhgmcrlcaoqswkbvdxrsdbjzsmpndfzhppwnqammptympqmdjasohfidpegrcrwhbflckrzssbazjoceaownqqmzjxrskoldumjdwpcqasgdsfrrommkezgdollqapnnjpgahbsraldsazfmkimfuocrkrpbapymzzydjpnnhfaxzlatiblsocmqcrgcaigmapanjzcqjflflomoaosraldhjcmqixrhkkrdyelnhlexwqslwpudhiyrpecdjdgmabphjdfnjlpbkaczojclxbprkcrgarlhrbpreqwbkjktjfrxulsznbpdmrgqaarnwygcayws")
+    # vwxyzKey = ("zpegbnhxuzizrlhqaoqhoummkdyfcrokacezjayrtoqcltkrldzzqmazwyjdokqfhigigjzwkysowzidmwkbscwqgmxhrbdnqkbdmoqymyekeszyelhlqbqscwqazixbsrzzqmbjimpnhepcrzyrphouemvzrbptnekesckpcszyelhlqbqhipecqzwiunmhakztrfmkvpbrgzhxunmpectiescqneqwrmqicrvjagshwvzdpjbrgdyxjtizbprjibahmyrkrowkadnascmknlzhiccmqraximzopcrhwvpdnqirhiobtdmamcmvhqgdnqmrnvjagmxhrbhicbvophpgniyfthgbfldnwkbiveirhhalsqkkigbtekcdxofqscwqwnpirqsmapndxpqfdknftzxuxlcknlndmpvphbdqqnakqfdmoxrzghqglzolpdgobwnpsfjkawfjscazmtmobyboekekvscskguxlczpegbvhiwhnulsqmapnniofzhgeqwbvnbdtghvpdvzqfdxkjntoaodqvqaymywysrzwzrbawxyezzbpzgoqysppbrgvpypnvziwbmejgmvhfxdnylkoppbphiposrdkkrgdofqnialdrzrbpzghxurodxrfjrbpmcwzihicrlcznprziztfzopeckvsmpnceygsnulscjjquzipqmdizrnkdgbrgdodsxdbflcjqyrvzyxlqzbbpxjqqmziwqrnmjbwogaxqdmasgdreqqrkkigbdapmmmapnniofzkzqpcnapbagikimftnbqnpnzcrvjaazzjpnngezwcjyrkdippdnmcrgczhfldnyllbznkgmblomoznrqdjbflejnjysdkkrdxdkmkjcvyspixqvzhiyrodbcmbekcdmekegjjlpbjzbyrhajzdmoldscarlhqaoqhouzmlhqkgstulszmaocppeoccokxzhyayws")
+    # uvwxyzKey = ("yodfarfvsxlcoiescqmdpvnnfdyfcrnjzbddhywpwrnzivmthzaarnvzwyjdnjpegmegehczhvpqybeznxlcncwqgmwgqacroizbprnvjagmaoazfmclqbqsbvpzymvzqpccnjylkoljifqdmzyrphntdludpznrqhhbpemryoazfmclqbqhhodbpdugslpkxhwvthigwqcsbzhxunlodbsmcqaoqhntooskynwkbhnhwvzdoiaqfhwvhrlcymolkdwdnzslmowkadmzrbloljxflfzjntczeiapqdmhwvpdmphqgmmzrbpdjzjxjsczornsivjagmwgqagmaztmskmdkkahpdhcgmynwkbiudhqglyjqonnfdyvgmyzypgrncwqwnohqprqynlbasncamphpvyvymxknlndlouogfbooldnncaoqznvhirhgzolpdfnavmtqdhidzcgpecbipnpczwoekekurbrjksvjacsbdyxjksdovmtlmapnnhneygkcouzyqyaqijxlzwargyxkjntnzncpzoywkbzvpobybnxbxyzzzzbpzfnpxrtnzpeysvmkxbksxnfkhhvhfxdmxkjntnznflslpofmmncepgriialdryqaoykfvsprguocltdlidxajcicrlcymoqymxrdxrsbzhxuoljdfzhnnulsciiptymnokblcokhfidncepetsdbflcipxqudwvjoceymulssivjxrsimjbwofzwpcqyqebuhnnommkcxebqnhmapnnhneyjdonaldsyxdkmkibuocripnzcruizzydhnlljhwtzlatgzjqqeimcrgcygekcrwjjzcqhdjdnqikaosryjbfleimixrhiipbaghjhlexuoqjyrqzhiyrncablfciabphhbdllnlxkaczmhajzdlnkcrgypjftdlneqwbihirlhntulszlznbotcmaarnuweacaso")
+    #
+    # # print(mean(plainText))
+    # # print(popVar(plainText))
+    # # print("PopVar of yz:", popVar(yzKey))
+    # # print("PopVar of xyz:", popVar(xyzKey))
+    # # print("PopVar of wxyz:", popVar(wxyzKey))
+    # # print("PopVar of vwxyz:", popVar(vwxyzKey))
+    # # print("PopVar of uvwxyz:", popVar(uvwxyzKey))
+    # print(splitPopVar(yzKey,2))
+    # print(splitPopVar(xyzKey,3))
+    # print(splitPopVar(wxyzKey,4))
+    # print(splitPopVar(vwxyzKey,5))
+    # print(splitPopVar(uvwxyzKey,6))
 
-    # print(popVar(knownFreq))
-    plainText = Counter("ethicslawanduniversitypoliciestodefendasystemyouneedtobeabletothinklikeanattackerandthatincludesunderstandingtechniquesthatcanbeusedtocompromisesecurityhoweverusingthosetechniquesintherealworldmayviolatethelawortheuniversitysrulesanditmaybeunethicalundersomecircumstancesevenprobingforweaknessesmayresultinseverepenaltiesuptoandincludingexpulsioncivilfinesandjailtimeourpolicyineecsisthatyoumustrespecttheprivacyandpropertyrightsofothersatalltimesorelseyouwillfailthecourseactinglawfullyandethicallyisyourresponsibilitycarefullyreadthecomputerfraudandabuseactcfaaafederalstatutethatbroadlycriminalizescomputerintrusionthisisoneofseverallawsthatgovernhackingunderstandwhatthelawprohibitsyoudontwanttoenduplikethisguyifindoubtwecanreferyoutoanattorneypleasereviewitsspoliciesonresponsibleuseoftechnologyresourcesandcaenspolicydocumentsforguidelinesconcerningproperuseofinformationtechnologyatumaswellastheengineeringhonorcodeasmembersoftheuniversitycommunityyouarerequiredtoabidebyt")
-    yzKey = ("csfharjzuzlcsmgucqqhrxnnjhahcrrnbdddlcyrwrrdkxmtldccrnzdyajdrnrggmikgjczlzrsybidpzlcrgysgmaksccrsmbdprrzlcgmescbfmgpsdqsfzrbymzdsrccrnankopnkhqdqdatphrxfnudtdptqhlfrgmrcscbfmgpsdqhlsfdpdykunpkblyxthmkyscsfdjzunpsfdsmgucqqhrxqqskcrymbhrlyxzdsmcsfhazjtlccqqnkdahpbslqsymadqdtdlopnzhlfdnpvczimcrqdqlyxpdqtjsgmqdtdpdndlzjsgdqtnsmzlcgmakscgmedvoskqhmmahthjegmcrymbiyhjsglcnsqnnjhaxgmcdargrrgyswnslsrrqcrndasrgcophtzaxymbopnndpswqgffsqndnrgcqqzrzjkrhkdqnpdjrcxmtuhjkdzgkrgcbmtprczasgmekyvdtjkwzlccsfhazjkwhqxmtpqcrnnlrgagkgswbyqceskjxpdycrgcbmlntrdpepzscymbzztqdybrbdzyzddbdpzjrrzrtrdrgyszqmzbkwbphkhlzjhxdqbmlntrdphlsptqhmmrggrgrmmcndrcucqykjzurrgysentdpmfzajgmetlccqqsymbvfzrsfdjzuopnfhzhrrwnscmmrvymrsmdlcsojhidrggretwhdhlcmtzsudazlqcecqwnssmzlzrsmqldwojdyrcqcugduhrrqomkgbgdqnlqcrnnlrgajdsrcndscbfmmkmfwqcrmtpbcrymbbydlrnnjhaxbnatkdlsqemqetgcckgmcranlbcqlhlfnqmocqsrcndhlemqkzrhmmrdaglnjnexysslyrudjkyrrgcdlfgmcdphlffnlnpbmcczqlclzdprmergctlhtdprgswbmlktlhrxwnszpdpdotgqccrnyagccaws")
-    xyzKey = ("brgfariyvxlcrlhscqpgsvnnigbfcrqmcbddkbzpwrqclvmtkcdarnyczyjdqmsegmhjhhczkysqybhcqxlcqfzqgmzjtacrrlcbprqymagmdrdzfmfotbqseyszymyctpccqmblkoomlfqdpcbrphqwgludscqrqhkesemrbrdzfmfotbqhkrgbpdxjvlpkakzvthljzqcseckxunorgbsmftdoqhqwroskbqzkbhqkzvzdrldqfhzykrlcbprlkdzgqzslprzkadpcubloomaflfcmqtczhldpqdpkzvpdpskqgmpcubpdmcmxjsfcrrnslymagmzjtagmdcwmskpgnkahsgkcgmbqzkbixgkqglbmtonnigbvgmbcbpgrqfzqwnrktprqbqobasqfdmphsybvymanqlndorxogferrldnqfdoqzqykirhjcrlpdiqdvmttgkidzfjsecblsqpczzrhkekxuerjkvymacsegbxjkvgrvmtopdpnnkqhygkfrxzyqbdtijxoczargbanjntqcqcpzrbzkbzysrbybqaexyzcccbpziqsxrtqcseysypnxbkvaqfkhkykfxdpanjntqcqflsosrfmmqfhpgrlldldrbtdoykiyvprgxrfltdolgxajflfrlcbprqymaugxrseckxuoomgfzhqqxlscllstymqrnblcrnkfidqfhpetvgeflclsaqudzymocebpxlsslymxrslpmbwoiczpcqbthbuhqqrmmkfahbqnkpdpnnkqhyjdrqdldsbagkmklexocrlsqzcrxlczydkqoljhzwclatjcmqqelpfrgcbjhkcrzmmzcqkgmdnqlndosrbmeflelplxrhllsbagkmklexxrtjyrtckiyrqfdblffldbphkegllnoanaczpkdjzdoqncrgbsmftdoqhqwblklrlhqwxlszocqbotfpdarnxzhacavr")
-    wxyzKey = ("aqfhypjzsxlcqkguaoqhpvnnhfahaprnzbddjayruprdivmtjbccplzdwyjdplrgekikehczjxrswzidnxlcpeysekakqacrqkbdnprzjagmcqcbdkgpqbqsdxrbwkzdqpccplanimpnifqdobatnfrxdludrbptoflfpemraqcbdkgpqbqhjqfdnbykslpkzjyxrfmkwqcsdbjzslpsdbsmescqofrxooskapymzfrlwvzdqkcsdfazhrlcaoqnibahnzsloqymybqdrblonlzhjddnntczgkcrobqlwvpdorjsekqdrbpdlblzhqgdornskxlcekakqagmcbvoqiqhkkahrfjeekcrwkbiwfjsejcnqonnhfaxekcdypgrpeysulslqprqapndyqrgamphrxaxwkbonlndnqwqedfsoldnpecqoxrzhirhibqnnbjravmtsfjkbxgkpecbkrpraxasekekwtdthiwzjacsdfazhiwhovmtnocrlllreygkeqwbwoceqijxnbycpecbkjntpbpenxscwkbzxrqdwzrbbxyzbbbdnxjrpxrtpbrgwqzqkxbkuzphiflzhfxdozmllrrdnflsnrqhkkrgepgrkkcnbpcuaoykhxurpeyscltdnkfzyhgmcrlcaoqswkbvdxrsdbjzsmpndfzhppwnqammptympqmdjasohfidpegrcrwhbflckrzssbazjoceaownqqmzjxrskoldumjdwpcqasgdsfrrommkezgdollqapnnjpgahbsraldsazfmkimfuocrkrpbapymzzydjpnnhfaxzlatiblsocmqcrgcaigmapanjzcqjflflomoaosraldhjcmqixrhkkrdyelnhlexwqslwpudhiyrpecdjdgmabphjdfnjlpbkaczojclxbprkcrgarlhrbpreqwbkjktjfrxulsznbpdmrgqaarnwygcayws")
-    vwxyzKey = ("zpegbnhxuzizrlhqaoqhoummkdyfcrokacezjayrtoqcltkrldzzqmazwyjdokqfhigigjzwkysowzidmwkbscwqgmxhrbdnqkbdmoqymyekeszyelhlqbqscwqazixbsrzzqmbjimpnhepcrzyrphouemvzrbptnekesckpcszyelhlqbqhipecqzwiunmhakztrfmkvpbrgzhxunmpectiescqneqwrmqicrvjagshwvzdpjbrgdyxjtizbprjibahmyrkrowkadnascmknlzhiccmqraximzopcrhwvpdnqirhiobtdmamcmvhqgdnqmrnvjagmxhrbhicbvophpgniyfthgbfldnwkbiveirhhalsqkkigbtekcdxofqscwqwnpirqsmapndxpqfdknftzxuxlcknlndmpvphbdqqnakqfdmoxrzghqglzolpdgobwnpsfjkawfjscazmtmobyboekekvscskguxlczpegbvhiwhnulsqmapnniofzhgeqwbvnbdtghvpdvzqfdxkjntoaodqvqaymywysrzwzrbawxyezzbpzgoqysppbrgvpypnvziwbmejgmvhfxdnylkoppbphiposrdkkrgdofqnialdrzrbpzghxurodxrfjrbpmcwzihicrlcznprziztfzopeckvsmpnceygsnulscjjquzipqmdizrnkdgbrgdodsxdbflcjqyrvzyxlqzbbpxjqqmziwqrnmjbwogaxqdmasgdreqqrkkigbdapmmmapnniofzkzqpcnapbagikimftnbqnpnzcrvjaazzjpnngezwcjyrkdippdnmcrgczhfldnyllbznkgmblomoznrqdjbflejnjysdkkrdxdkmkjcvyspixqvzhiyrodbcmbekcdmekegjjlpbjzbyrhajzdmoldscarlhqaoqhouzmlhqkgstulszmaocppeoccokxzhyayws")
-    uvwxyzKey = ("yodfarfvsxlcoiescqmdpvnnfdyfcrnjzbddhywpwrnzivmthzaarnvzwyjdnjpegmegehczhvpqybeznxlcncwqgmwgqacroizbprnvjagmaoazfmclqbqsbvpzymvzqpccnjylkoljifqdmzyrphntdludpznrqhhbpemryoazfmclqbqhhodbpdugslpkxhwvthigwqcsbzhxunlodbsmcqaoqhntooskynwkbhnhwvzdoiaqfhwvhrlcymolkdwdnzslmowkadmzrbloljxflfzjntczeiapqdmhwvpdmphqgmmzrbpdjzjxjsczornsivjagmwgqagmaztmskmdkkahpdhcgmynwkbiudhqglyjqonnfdyvgmyzypgrncwqwnohqprqynlbasncamphpvyvymxknlndlouogfbooldnncaoqznvhirhgzolpdfnavmtqdhidzcgpecbipnpczwoekekurbrjksvjacsbdyxjksdovmtlmapnnhneygkcouzyqyaqijxlzwargyxkjntnzncpzoywkbzvpobybnxbxyzzzzbpzfnpxrtnzpeysvmkxbksxnfkhhvhfxdmxkjntnznflslpofmmncepgriialdryqaoykfvsprguocltdlidxajcicrlcymoqymxrdxrsbzhxuoljdfzhnnulsciiptymnokblcokhfidncepetsdbflcipxqudwvjoceymulssivjxrsimjbwofzwpcqyqebuhnnommkcxebqnhmapnnhneyjdonaldsyxdkmkibuocripnzcruizzydhnlljhwtzlatgzjqqeimcrgcygekcrwjjzcqhdjdnqikaosryjbfleimixrhiipbaghjhlexuoqjyrqzhiyrncablfciabphhbdllnlxkaczmhajzdlnkcrgypjftdlneqwbihirlhntulszlznbotcmaarnuweacaso")
-
-    # print(mean(plainText))
-    # print(popVar(plainText))
-    # print("PopVar of yz:", popVar(yzKey))
-    # print("PopVar of xyz:", popVar(xyzKey))
-    # print("PopVar of wxyz:", popVar(wxyzKey))
-    # print("PopVar of vwxyz:", popVar(vwxyzKey))
-    # print("PopVar of uvwxyz:", popVar(uvwxyzKey))
-    print(splitPopVar(yzKey,2))
-    print(splitPopVar(xyzKey,3))
-    print(splitPopVar(wxyzKey,4))
-    print(splitPopVar(vwxyzKey,5))
-    print(splitPopVar(uvwxyzKey,6))
 
 #     print(detect_langs("""cryptographyisthepracticeandstudyoftechniquesforsecurecommunicationin
 # thepresenceofthirdpartiescalledadversariesmoregenerallyitisaboutconstruc
