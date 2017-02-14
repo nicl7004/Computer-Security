@@ -75,7 +75,7 @@ def modOccurances(occuranceInfo):
     return dictSpace
 
 ---------------------------------------------------------------------------------------------------------------
-Now since we know the length of the key (in our case 7) we know that we can use every nth index of our cipher text as a Caesar cipher.  This is where frequency analysis comes into play, by knowing the frequencies of letters in each of the 7 Cesar ciphers we can compare to the relative frequency of the English alphabet.  My attempted implementation of frequency analysis worked partially, I was able to deduce that the key looked like boulder although my program didn’t come to that conclusion on its own.  Here is the code I wrote for this part:
+Now since we know the length of the key (in our case 7) we know that we can use every nth index of our cipher text as a Caesar cipher.  This is where frequency analysis comes into play, by knowing the frequencies of letters in each of the 7 Cesar ciphers we can compare to the relative frequency of the English alphabet.  My attempted implementation of frequency analysis worked partially, I was able to deduce that the key looked like boulder.  To make sure I was right I used boulder as the key and found that it was correct.  Here is the code I wrote for this part:
 ---------------------------------------------------------------------------------------------------------------
 def frequencyAnalysis(texty, keyLength):
     knownFreq = {'A': 8.167, 'B': 1.492, 'C': 2.782, 'D': 4.253, 'E': 12.702, 'F': 2.228, 'G': 2.015,
@@ -163,6 +163,8 @@ Sadly this program would take days to run to completion, with there being 26 pos
 
 Dictionary Attack:
 
+Another possible attack would be to download a dictionary of common english words (if you knew your opponent was english speaking). Then iterating over this text file of words one could use each word as a key, and then determine if the shifted ciphertext was english or not using the langdetect package.  This attack is not as encompassing as the previous two attacks, but may be more efficient that the brute force attack and easier to implement than the frequency analysis attack.
+
 # Problem 2:
 part_a_var_english=10.405667735207103
 part_b_var_plaintext=955.3668639053257
@@ -236,3 +238,9 @@ plainText = Counter("ethicslawanduniversitypoliciestodefendasystemyouneedtobeabl
     print(splitPopVar(wxyzKey,4))
     print(splitPopVar(vwxyzKey,5))
     print(splitPopVar(uvwxyzKey,6))
+
+
+---------------------------------------------------------------------------------------------------------------
+Ciphertext -> Plaintext:
+
+cryptographyisthepracticeandstudyoftechniquesforsecurecommunicationinthepresenceofthirdpartiescalledadversariesmoregenerallyitisaboutconstructingandanalyzingprotocolsthatovercometheinfluenceofadversariesandwhicharerelatedtovariousaspectsininformationsecuritysuchasdataconfidentialitydataintegrityauthenticationandnonrepudiationmoderncryptographyintersectsthedisciplinesofmathematicscomputerscienceandelectricalengineeringmoderncryptographyisheavilybasedonmathematicaltheoryandcomputersciencepracticecryptographicalgorithmsaredesignedaroundcomputationalhardnessassumptionsmakingsuchalgorithmshardtobreakinpracticebyanyadversaryitistheoreticallypossibletobreaksuchasystembutitisinfeasibletodosobyanyknownpracticalmeanscryptologyrelatedtechnologyhasraisedanumberoflegalissuestheelectronicfrontierfoundationwasinvolvedinacaseintheunitedstateswhichquestionedwhetherrequiringsuspectedcriminalstoprovidetheirdecryptionkeystolawenforcementisunconstitutionaltheeffarguedthatthisisaviolationoftherightofnotbeingforcedtoincriminateoneselfasgiveninthefifthamendm
