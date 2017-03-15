@@ -69,4 +69,6 @@ s = socket.socket(socket.AF_INET, socket.SOCK_RAW, socket.IPPROTO_TCP)
 
 # receive a packet
 while True:
-  print s.recvfrom(65565)
+  (bytes, addr) = s.recvfrom(65565)
+  if "54.85.9.24" in addr:
+    print("got one") 
