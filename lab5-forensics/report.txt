@@ -1,0 +1,3 @@
+1.  The system is password protected.  If the incorrect password is applied it could be that the image self destructs, or another booby trap could be present.
+
+2.  The subject runs an instance of Linux Solaris, x86.  See operating_system.txt for further details.  This was pulled from the Autopsy description of the disk image.
