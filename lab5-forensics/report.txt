@@ -1,3 +1,5 @@
 1.  The system is password protected.  If the incorrect password is applied it could be that the image self destructs, or another booby trap could be present.  Beyond that when attempting to boot in standard mode, the message "THEFT DETECTED, ENGAGING SECURITY SYSTEMEXT2" is displayed, alerting us that the system knows it we are not its normal user(s).
 
 2.  The subject runs an instance of Linux Solaris, x86.  See operating_system.txt for further details.  This was pulled from the Autopsy description of the disk image.
+
+3. We were able to break into the system by booting into recovery mode, and then choosing to open a root shell in "network" mode from the recover menu.  Using the command "cut -d: -f1 /etc/passwd" we were able to grab a list of passwords from the target system.  This can be seen in /evidence/user_list.txt.  Some notable usernames include nefarious, haldemon, plkituser, and avahi.  Beyond that in the /home directory we see that there is another folder called nefarious.  This leads us to believe that nefarious is likely the primary user of the computer.
