@@ -9,3 +9,4 @@
   At this point I think we are suppossed to use the list of passwords in the users desktop and feed that to the password cracker described above
   In the users desktop there exists msf3 software, which is usually used to execute exploit code against a remote machine.
   Hydra is a tool used to used to brute force remote login passwords.
+  Found freenode on his desktop, this is an IRC communication channel.
