@@ -13,3 +13,4 @@
   Hydra is a tool used to used to brute force remote login passwords.
   Found freenode on his desktop, this is an IRC communication channel.
   Attempted to modify /etc/resolv.confg to get around apt-get problem -> didn't work
+  Found more information on profiles in /sys/kernel/security/apparmor see /evidence/security_profiles.txt
