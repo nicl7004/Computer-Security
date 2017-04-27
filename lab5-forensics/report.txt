@@ -12,3 +12,4 @@
   In the users desktop there exists msf3 software, which is usually used to execute exploit code against a remote machine.
   Hydra is a tool used to used to brute force remote login passwords.
   Found freenode on his desktop, this is an IRC communication channel.
+  Attempted to modify /etc/resolv.confg to get around apt-get problem -> didn't work
