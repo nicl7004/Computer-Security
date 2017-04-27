@@ -14,7 +14,7 @@ al]
 
 01:54 —!— Irssi: Join to “planning was synced in 2 secs
 
-01:54 —!— accomplice [n=suolchokﬂsuolchokhost.eecs.umich.edu] has joined ﬁplanni
+01:54 —!— accomplice [n=swolchok@swolchokhost.eecs.umich.edu] has joined ﬁplanni
 “9
 
 01:54 < accomplice) oh good you're here
