@@ -4,7 +4,7 @@
 
 3. We were able to break into the system by booting into recovery mode, and then choosing to open a root shell in "network" mode from the recover menu.  Using the command "cut -d: -f1 /etc/passwd" we were able to grab a list of passwords from the target system.  This can be seen in /evidence/user_list.txt.  Some notable usernames include nefarious, haldemon, plkituser, and avahi.  Beyond that in the /home directory we see that there is another folder called nefarious.  This leads us to believe that nefarious is likely the primary user of the computer.
 
-4. Yes, see /evidence/freenode.txt  The suspect has the username swolchok@swolchokhost.eecs.umich.edu in their freenode conversation.  It sounds like they are planning the get away after nefarous finishes killing the person in question.  He says "ill be waiting at 3:15" 
+4. Yes, see /evidence/freenode.txt  The suspect has the username swolchok@swolchokhost.eecs.umich.edu in their freenode conversation.  It sounds like they are planning the get away after nefarous finishes killing the person in question.  He says "ill be waiting at 3:15"
 
 9. There is a folder in /nefarious called hydra-5.4-src.  This is a tool to crack passwords and user login info.
   In /home/nearious/hydra-5.4-src/hydra-gtk/README the user says to email patches to snakebyte@gmx.de
