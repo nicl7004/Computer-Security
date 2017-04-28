@@ -6,7 +6,21 @@
 
 4. Yes, see /evidence/freenode.txt  The suspect has the username swolchok@swolchokhost.eecs.umich.edu in their freenode conversation.  It sounds like they are planning the get away after nefarous finishes killing the person in question.  He says "ill be waiting at 3:15"
 
-7. Recently deleted files include: password4.txt, .Xauthority
+5. There was a file called passwords.zip living in nefarious's directory.  We used fcrackzip in combination with a large dictionary to find that the password for the zip file was soelite (lolz).  After trying some of the passwords in the zip file on the target system we found that the third one allowed us access under the username "nefarious" with the password "supersecret".
+
+6. We found "nerf-blaster" in the targets history.  He searched "best nerf guns" on wiki.answers, we found that cookies.sqlite when searching through his mozilla history. He was clearly researching the most effective nerf blaster to get the job done.  See evidence/nerf_gun_blaster_history.txt for more details.
+
+7. Recently deleted files include: password4.txt, .Xauthority, and evil_plan.bmp.  More evidence can be seen in /evidence/deleted.txt.  It is likely that evil_plan contains the master plan behind all of nefarious's terrible deeds.  After checking the adversary's bash history we found the following: "rm/home/nefarious/.bash_history" followed by "unset HISTORY" followed by "rm evil_plan.bmp".  We assumed he removed his bash history in the process of deleting incriminating evidence.
+
+8. Timeline:
+
+Wed Nov 25 01:54:24 2009 - Nefarious messages his accomplice
+
+Wed Nov 25 - 26 - Victim killed
+
+Nov 30 - Nefarious erased his bash history & deleted his evil_plan.bmp
+
+Dec 1 - Case went cold
 
 9. There is a folder in /nefarious called hydra-5.4-src.  This is a tool to crack passwords and user login info.
   In /home/nearious/hydra-5.4-src/hydra-gtk/README the user says to email patches to snakebyte@gmx.de
@@ -17,3 +31,7 @@
   Attempted to modify /etc/resolv.confg to get around apt-get problem -> didn't work
   Found more information on profiles in /sys/kernel/security/apparmor see /evidence/security_profiles.txt
   pulled passwords after investigating memory with autopsy
+
+  We found the two shell files existing on partition 1, see evidence/shell.txt  We assumed these interacted with the online targets we were supposed to attack, we were late in the game though and unable to get the "ok" from the professor to investigate these sources.  It appeared there was a twitter account linked to the suspect as well as something related to http://www.swlink.net.
+
+  We also found that the user "Nefarious" connected to several ip addresses in the .ssh directory in /home. In the known_hosts folder there are two specific addresses he used to connect: fafner.eecs.umich.edu, 141.212.109.58, and 141.212.111.42.  This information was on partition 3.
