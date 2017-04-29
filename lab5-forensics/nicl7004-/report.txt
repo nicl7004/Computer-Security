@@ -1,0 +1,37 @@
+1.  The system is password protected.  If the incorrect password is applied it could be that the image self destructs, or another booby trap could be present.  Beyond that when attempting to boot in standard mode, the message "THEFT DETECTED, ENGAGING SECURITY SYSTEMEXT2" is displayed, alerting us that the system knows it we are not its normal user(s).  After this displays, it is impossible to log into the system and the VM needs to be recreated.
+
+2.  The subject runs an instance of Linux Solaris, x86.  See operating_system.txt for further details.  This was pulled from the Autopsy description of the disk image.  We also discovered Puppy431 in the second partition, Puppy is a lightweight linux distro.
+
+3. We were able to break into the system by booting into recovery mode, and then choosing to open a root shell in "network" mode from the recover menu.  Using the command "cut -d: -f1 /etc/passwd" we were able to grab a list of passwords from the target system.  This can be seen in /evidence/user_list.txt.  Some notable usernames include nefarious, haldemon, plkituser, and avahi.  Beyond that in the /home directory we see that there is another folder called nefarious.  This leads us to believe that nefarious is likely the primary user of the computer.
+
+4. Yes, see /evidence/freenode.txt  The suspect has the username swolchok@swolchokhost.eecs.umich.edu in their freenode conversation.  It sounds like they are planning the get away after nefarous finishes killing the person in question.  He says "ill be waiting at 3:15"
+
+5. There was a file called passwords.zip living in nefarious's directory.  We used fcrackzip in combination with a large dictionary to find that the password for the zip file was soelite (lolz).  After trying some of the passwords in the zip file on the target system we found that the third one allowed us access under the username "nefarious" with the password "supersecret".
+
+6. We found "nerf-blaster" in the targets history.  He searched "best nerf guns" on wiki.answers, we found that cookies.sqlite when searching through his mozilla history. He was clearly researching the most effective nerf blaster to get the job done.  See evidence/nerf_gun_blaster_history.txt for more details.
+
+7. Recently deleted files include: password4.txt, .Xauthority, and evil_plan.bmp.  More evidence can be seen in /evidence/deleted.txt.  It is likely that evil_plan contains the master plan behind all of nefarious's terrible deeds.  After checking the adversary's bash history we found the following: "rm/home/nefarious/.bash_history" followed by "unset HISTORY" followed by "rm evil_plan.bmp".  We assumed he removed his bash history in the process of deleting incriminating evidence.
+
+8. Timeline:
+
+Wed Nov 25 01:54:24 2009 - Nefarious messages his accomplice
+
+Wed Nov 25 - 26 - Victim killed
+
+Nov 30 - Nefarious erased his bash history & deleted his evil_plan.bmp
+
+Dec 1 - Case went cold
+
+9. There is a folder in /nefarious called hydra-5.4-src.  This is a tool to crack passwords and user login info.
+  In /home/nearious/hydra-5.4-src/hydra-gtk/README the user says to email patches to snakebyte@gmx.de
+  At this point I think we are suppossed to use the list of passwords in the users desktop and feed that to the password cracker described above
+  In the users desktop there exists msf3 software, which is usually used to execute exploit code against a remote machine.
+  Hydra is a tool used to used to brute force remote login passwords.
+  Found freenode on his desktop, this is an IRC communication channel.
+  Attempted to modify /etc/resolv.confg to get around apt-get problem -> didn't work
+  Found more information on profiles in /sys/kernel/security/apparmor see /evidence/security_profiles.txt
+  pulled passwords after investigating memory with autopsy
+
+  We found the two shell files existing on partition 1, see evidence/shell.txt  We assumed these interacted with the online targets we were supposed to attack, we were late in the game though and unable to get the "ok" from the professor to investigate these sources.  It appeared there was a twitter account linked to the suspect as well as something related to http://www.swlink.net.
+
+  We also found that the user "Nefarious" connected to several ip addresses in the .ssh directory in /home. In the known_hosts folder there are two specific addresses he used to connect: fafner.eecs.umich.edu, 141.212.109.58, and 141.212.111.42.  This information was on partition 3.

@@ -1,0 +1,1 @@
+root@nefarious-laptop:/sys/kernel/security/apparmor# cat profiles /usr/shin/tcpdump (enforce) /usr/sbin/cupsd (enforce) /usr/lib/cups/backend/cups-pdf (enforce) /usr/lib/connman/scripts/dhclient-script (enforce) /usr/lib/NetworkManager/nm-dhcp-client.action (enforce) /shin/dhclient3 (enforce) /shin/dhclient-script (enforce) root@nefarious-laptop:/sys/kernel/security/apparmor# _ 

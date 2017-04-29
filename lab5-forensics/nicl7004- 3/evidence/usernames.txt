@@ -1,0 +1,1 @@
+nefarious, haldemon, plkituser, avahi, messagebus, saned, gdm, avahi-autoipd, hplip, klog, syslog, libuuid, nobody, gnats, irc, list, backup, www-data, proxy, uucp, news, mail, lp, man

